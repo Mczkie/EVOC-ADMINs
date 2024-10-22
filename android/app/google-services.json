@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "50078598937",
+    "project_id": "evocapp-4d466",
+    "storage_bucket": "evocapp-4d466.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50078598937:android:8df74629d9a1b6b8c3a788",
+        "android_client_info": {
+          "package_name": "com.example.evocapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrNDBle2yJiDaYGId1gZ2Bv6qdj3OkMdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

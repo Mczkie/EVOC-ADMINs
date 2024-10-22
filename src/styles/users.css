@@ -1,0 +1,21 @@
+.Table-container {
+    padding: 40px ;
+    display: flex;
+    color: black;
+}
+
+table{
+    width: 90%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
