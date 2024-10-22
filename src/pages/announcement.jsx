@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import '../styles/announcement.css';
+import '../styles/announcement.css';
 
 function Announcement() {
   const [announcements, setAnnouncements] = useState([]);
@@ -54,37 +54,42 @@ function Announcement() {
   };
 
   return (
-    <div className="announcementBody">
+    <div className='content'>
+      <div className="announcementBody">
       <h1>Announcements</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Announcement Title"
-        />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Announcement Description"
-        />
-        <button type="submit">Add Announcement</button>
-        {error && <p className="error">{error}</p>}
-        {successMessage && <p className="success">{successMessage}</p>}
-      </form> 
+        <form className='announcementform' onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Announcement Title"
+          />
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Announcement Description"
+          />
+          <button type="submit">Add Announcement</button>
+          {error && <p className="error">{error}</p>}
+          {successMessage && <p className="success">{successMessage}</p>}
+        </form> 
 
-      <h2>Existing Announcements</h2>
+      </div>
       <div className="announcementList">
-        {announcements.map((announcement) => (
-          <div key={announcement.id} className="announcementItem">
-            <h3>{announcement.title}</h3>
-            <p>{announcement.description}</p>
-            <p><small>{announcement.time_stamp}</small></p>
-          </div>
-        ))}
+      <h2>Existing Announcements</h2>
+        <div className='list'>
+          {announcements.map((announcement) => (
+              <div key={announcement.id} className="announcementItem">
+                <h3>{announcement.title}</h3>
+                <p className='desc'>{announcement.description}</p>
+                <small>{announcement.time_stamp}</small>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
+    
   );
 }
 
