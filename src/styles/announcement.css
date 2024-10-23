@@ -17,26 +17,6 @@
     }
    }
 }
-body {
-    display: flex;
-    margin: 0;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-}
-.column {
-    flex: 1; /* Each column takes equal space */
-    padding: 20px;
-    box-sizing: border-box;
-}
-.column1 {
-    background-color: #4CAF50;
-    color: white;
-}
-.column2 {
-    background-color: #f4f4f4;
-    color: black;
-}
-
 .announcementBody{
     /* flex: 1;  */
     /* Each section takes equal space */

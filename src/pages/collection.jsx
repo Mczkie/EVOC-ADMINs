@@ -28,7 +28,7 @@ function Collection() {
 
     const newSchedule = { location, collection_date: collectionDate };
 
-    fetch("http://localhost:5000/api/collection-schedule", {
+    fetch("http://localhost:5000/api/newcollection-schedule", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
