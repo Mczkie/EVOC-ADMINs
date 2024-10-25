@@ -16,7 +16,7 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   final DbHelper _dbHelper = DbHelper();
-  bool _isLoggedIn = true;
+  final bool _isLoggedIn = true;
   Map<DateTime, String> _eventDates = {};
   DateTime? _selectedDate;
   String _eventNote = '';
@@ -30,15 +30,6 @@ class _MyHomeState extends State<MyHome> {
 
   Future<void> _checkLoginStatus() async {
     String? loggedInUser = await _dbHelper.getLoggedInUser();
-    if (loggedInUser == null) {
-      setState(() {
-        _isLoggedIn = false;
-      });
-
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MyStartup(email: widget.email)),
-      );
-    }
   }
 
   Future<void> _loadEventDates() async {
