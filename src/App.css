@@ -1,7 +1,4 @@
-body {
-  margin: 0;
-  padding: 0;
-}
+
 
 #action-container {
   display: flex;
@@ -29,4 +26,131 @@ body {
 #edit-btn:hover,
 #delete-btn:hover {
   opacity: 0.9; /* Slight hover effect */
+}
+
+/* General layout styles */
+.scheduleWrapper {
+  display: flex;
+  flex-direction: row; /* Align children in a row */
+  justify-content: space-between; /* Space out the items evenly */
+  align-items: flex-start; /* Align items to the start (top) */
+  padding: 20px;
+  gap: 20px; /* Add space between the form and the schedule card */
+  color: black; /* Set default text color to black */
+}
+
+.headingSche {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+/* Form styles */
+.scheduleForm {
+  display: flex;
+  flex-direction: column;  /* Stack form elements vertically */
+  width: 100%;
+  max-width: 300px;        /* Limit form width */
+  margin-bottom: 20px;
+}
+
+.inputField {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.submitButton {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+/* Error and success messages */
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.success {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Schedule card styles */
+.scheduleCard {
+  width: 100%;
+  max-width: 900px; /* Limit schedule card width */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.scheduleCard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scheduleCard th, .scheduleCard td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.scheduleCard th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.scheduleCard tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* General Styles for Announcement List */
+.announcementList {
+  width: 150vh;
+  margin: 0 auto;
+}
+
+.announcementTable {
+  width: 100%; /* Ensure the table uses 100% of the available width */
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 100px;
+}
+
+.announcementTable th, .announcementTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.announcementTable th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.announcementTable tr:hover {
+  background-color: #f9f9f9;
+}
+.content{
+  display: inline-flex;
+  margin: 0;
+  overflow: hidden;
+  height: auto;
+  width: auto;
 }

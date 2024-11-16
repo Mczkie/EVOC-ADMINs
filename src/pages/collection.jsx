@@ -52,36 +52,50 @@ function Collection() {
   };
 
   return (
-    <div className="scheduleBody">
-      <h1>Collection Schedule</h1>
-      
-      <form onSubmit={handleSubmit}>
+    <div className="scheduleWrapper">
+      <form onSubmit={handleSubmit} className="scheduleForm">
+        <h2 className="headingSche">Schedule</h2>
+
         <input
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="Location"
+          className="inputField"
         />
         <input
           type="date"
           value={collectionDate}
           onChange={(e) => setCollectionDate(e.target.value)}
+          className="inputField"
         />
-        <button type="submit">Add Schedule</button>
+        <button type="submit" className="submitButton">Add</button>
+
         {error && <p className="error">{error}</p>}
         {successMessage && <p className="success">{successMessage}</p>}
       </form>
 
-      <h2>Existing Schedules</h2>
-      <div className="scheduleList">
-        {schedules.map((schedule) => (
-          <div key={schedule.id} className="scheduleItem">
-            <h3>{schedule.location}</h3>
-            <p>{new Date(schedule.collection_date).toLocaleDateString()}</p>
-          </div>
-        ))}
+      <div className="scheduleCard">
+        <table>
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {schedules.map((schedule) => (
+              <tr key={schedule.id}>
+                <td>{schedule.location}</td>
+                <td>{new Date(schedule.collection_date).toLocaleDateString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
+
+
   );
 }
 

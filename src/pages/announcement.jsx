@@ -26,7 +26,7 @@ function Announcement() {
       return;
     }
 
-    const newAnnouncement = { title, description};
+    const newAnnouncement = { title, description };
 
     fetch("http://localhost:5000/api/newannouncements", {
       method: "POST",
@@ -54,11 +54,11 @@ function Announcement() {
   };
 
   return (
-    <div className='content'>
+    <div className="content">
       <div className="announcementBody">
-      <h1>Announcements</h1>
+        <h1>Announcements</h1>
 
-        <form className='announcementform' onSubmit={handleSubmit}>
+        <form className="announcementform" onSubmit={handleSubmit}>
           <input
             type="text"
             value={title}
@@ -73,23 +73,51 @@ function Announcement() {
           <button type="submit">Add Announcement</button>
           {error && <p className="error">{error}</p>}
           {successMessage && <p className="success">{successMessage}</p>}
-        </form> 
+        </form>
+      </div>
 
-      </div>
-      <div className="announcementList">
-      <h2>Existing Announcements</h2>
-        <div className='list'>
-          {announcements.map((announcement) => (
-              <div key={announcement.id} className="announcementItem">
-                <h3>{announcement.title}</h3>
-                <p className='desc'>{announcement.description}</p>
-                <small>{announcement.time_stamp}</small>
-              </div>
+      {/* <div className="announcementList">
+        <h2>Existing Announcements</h2>
+        <table className="announcementTable">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            {announcements.map((announcement) => (
+              <tr key={announcement.id}>
+                <td>{announcement.title}</td>
+                <td>{announcement.description}</td>
+                <td>{announcement.time_stamp}</td>
+              </tr>
             ))}
-        </div>
-      </div>
+          </tbody>
+        </table>
+      </div> */}
+      <div className="announcementList">
+  <table className="announcementTable" > 
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {announcements.map((announcement) => (
+        <tr key={announcement.id}>
+          <td>{announcement.title}</td>
+          <td>{announcement.description}</td>
+          <td>{announcement.time_stamp}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
     </div>
-    
   );
 }
 
