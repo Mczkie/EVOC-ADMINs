@@ -27,6 +27,7 @@ function Users() {
               <th>email</th>
               <th>Role</th>
               <th>Date log</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -35,8 +36,9 @@ function Users() {
               <tr key={user.id}>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
+                <td>{user.status}</td>
                 <td>{user.time_stamp}</td>
-                <td><TableAction userId={user.id}/></td>
+                <td><TableAction email={user.email} password={user.password}/></td>
               </tr>
             ))}
           </tbody>

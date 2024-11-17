@@ -10,7 +10,7 @@ function Collection() {
 
   useEffect(() => {
     // Fetch all collection schedules on component mount
-    fetch("http://localhost:5000/api/collection-schedule")
+    fetch("http://localhost:5000/api/collectionschedule")
       .then((response) => response.json())
       .then((data) => setSchedules(data))
       .catch((err) => console.error("Error fetching schedules:", err));
@@ -28,7 +28,7 @@ function Collection() {
 
     const newSchedule = { location, collection_date: collectionDate };
 
-    fetch("http://localhost:5000/api/newcollection-schedule", {
+    fetch("http://localhost:5000/api/newcollectionschedule", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
