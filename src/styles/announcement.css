@@ -35,3 +35,65 @@
     overflow: hidden; /* Hide scrollbars */
     height: 100vh;
 }
+.contentWrapper {
+    display: flex;
+    flex-direction: row; /* Align children in a row */
+    justify-content: space-between; /* Space out the items evenly */
+    align-items: flex-start; /* Align items to the start (top) */
+    gap: 20px; /* Add space between the form and the schedule card */
+    color: black; /* Set default text color to black */
+    margin-top: 30px;
+  }
+  
+  .announcementList {
+    width: 100%; /* Adjust width to fit the screen */
+    margin: 0 auto;
+  }
+  
+  .announcementTable {
+    width: 100%; /* Ensure the table uses 100% of the available width */
+    border-collapse: collapse;
+    background-color: white; /* Set table background color to white */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .announcementTable th, .announcementTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .announcementTable th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .announcementTable tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .pagination {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: flex-start; /* Align pagination buttons to the left */
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    cursor: pointer;
+  }
+  
+  .pagination button:hover {
+    background-color: #ddd;
+  }
+  
+  .pagination .active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  

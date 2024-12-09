@@ -1,0 +1,28 @@
+.scheduleCard {
+  position: relative; /* Ensure that pagination can be positioned inside the card */
+}
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  position: relative; /* Allow pagination to be placed directly under the table */
+  margin-top: 10px; /* Space between the table and pagination */
+  justify-content: flex-start;
+  bottom: 0; /* Align the pagination to the bottom */
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+}
+
+.pagination .active {
+  background-color: #4CAF50;
+  color: white;
+}
