@@ -26,8 +26,8 @@ function Users() {
             <tr>
               <th>email</th>
               <th>Role</th>
-              <th>Date log</th>
               <th>Status</th>
+              <th>Date log</th>
               <th>Actions</th>
             </tr>
           </thead>
