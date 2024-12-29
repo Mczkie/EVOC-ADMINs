@@ -1,19 +1,73 @@
-.container {
-    padding: 10px 10px;
+/* Apply a background image to the container */
+body {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    padding: 20px;
     margin-top: 50px;
     display: flex;
     justify-content: center;
     gap: 20px;
-}
-
-.contentContainer {
+    flex-wrap: wrap; /* Make it responsive */
+  }
+  
+  .contentContainer {
     border-radius: 5px;
-    background-color: #f8f9fa;
+    background-color: rgba(248, 249, 250, 0.9); /* Slight transparency for background */
     color: black;
     width: 220px;
     text-align: center;
-}
-
-.contentContainer h1 {
-    font-size: 20px;
-}
+    padding: 15px;
+    margin-bottom: 20px; /* Add space between widgets */
+  }
+  
+  .contentContainer h1 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .contentContainer h2 {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+      flex-direction: column;
+    }
+  
+    .contentContainer {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contentContainer {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .contentContainer h1 {
+      font-size: 18px;
+    }
+  
+    .contentContainer h2 {
+      font-size: 24px;
+    }
+  }
+  

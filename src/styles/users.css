@@ -19,3 +19,51 @@ th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
+
+.Table-container {
+    position: relative;
+    padding-bottom: 50px; /* Add space for the pagination controls */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px; /* Ensures some space between table and pagination */
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .paginationuser {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: black; /* Set pagination text to black */
+  }
+  
+  .paginationuser button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: black; /* Set pagination text to black */
+    border: none;
+    border-radius: 3px;
+  }
+  
+  .paginationuser button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    color: black; /* Set pagination text to black */
+  }
+  
+  .paginationuser span {
+    font-size: 14px;
+    color: black; /* Set pagination text to black */
+  }
+  
