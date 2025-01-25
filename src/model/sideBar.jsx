@@ -32,11 +32,11 @@ function Sidebar() {
             </div>
             <hr />
             <ul>
-                <li><span><FaHome/></span><Link to="/dashboard">Dashboard</Link></li>
-                <li><span><FaUserCircle /></span><Link to="/dashboard/user">Users</Link></li>
-                <li><span><FaCalendarAlt /></span><Link to="/dashboard/collection-schedule">Collection Schedule</Link></li>
-                <li><span><FaBullhorn /></span><Link to="/dashboard/announcement">Announcement</Link></li>
-                <li><span><FaFileAlt /></span><Link to="/dashboard/reports">Reports</Link></li>
+                <li><Link to="/dashboard"><span><FaHome/></span>Dashboard</Link></li>
+                <li><Link to="/dashboard/user"><span><FaUserCircle /></span>Users</Link></li>
+                <li><Link to="/dashboard/collection-schedule"><span><FaCalendarAlt /></span>Collection Schedule</Link></li>
+                <li><Link to="/dashboard/announcement"><span><FaBullhorn /></span>Announcement</Link></li>
+                <li><Link to="/dashboard/reports"><span><FaFileAlt /></span>Reports</Link></li>
             </ul>
             <div className='buttons'>
             <button onClick={handleLogout} className='buttonLogout'>Logout</button>
