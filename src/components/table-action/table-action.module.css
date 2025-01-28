@@ -6,7 +6,7 @@
   }
   
   #edit-btn,
-  #delete-btn {
+  #delete-btn{
     padding: 10px 15px;
     background-color: #4caf50; /* Green background for the edit button */
     border: none;
@@ -16,12 +16,27 @@
     transition: background-color 0.3s;
   }
   
+  #restore-btn {
+    padding: 10px 15px;
+    background-color: #4caf50; /* Green background for the edit button */
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+
   #delete-btn {
     background-color: #f44336; /* Red background for the delete button */
   }
+  #restore-btn {
+    background-color: #2237f3; /* Red background for the delete button */
+  }
   
   #edit-btn:hover,
-  #delete-btn:hover {
+  #delete-btn:hover,
+  #restore-btn:hover {
     opacity: 0.9; /* Slight hover effect */
   }
   
