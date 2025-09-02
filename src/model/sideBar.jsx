@@ -28,6 +28,8 @@ function Sidebar() {
     return (
         <div className="Sidebar">
             <div className='title'>
+                <h1>EVOC ADMIN</h1>
+                <hr />
                 <h2>Dashboard</h2>
             </div>
             <hr />

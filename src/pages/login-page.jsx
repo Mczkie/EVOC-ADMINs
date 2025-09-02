@@ -1,66 +1,92 @@
 import { useState } from "react";
-import axios from 'axios';
-import '../styles/login-page.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import "../styles/login-page.css";
 
 function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
-    const [showPassowrd, setShowPassowrd] = useState(false);
-    const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
+  const handleCheckboxChange = () => {
+    setShowPassword(!showPassword);
+  };
 
-    const handleCheckboxChange = () => {
-        setShowPassowrd(!showPassowrd);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:5001/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setTimeout(() => {
+            navigate("/Dashboard"); // redirect after login
+            setMessage(data.message);
+        }, 1000);
+        alert('Login Successful');
+        
+      } else if (response.status === 401) {
+        setMessage("Login failed: Wrong credentials!");
+      } else {
+        console.log(data);
+        setMessage("An error occurred. Please try again later.");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("An error occurred. Please try again later.");
     }
 
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+  };
 
-        try {
-            const response = await axios.post('http://localhost:5000/api/login', {  email, password });
-            navigate('/Dashboard');
-            setMessage(response.data.message);
-        }catch (error) {
-            if (error.response && error.response.status === 401) {
-                setMessage('Login failed, Wrong Credentials!');
-            }else {
-                setMessage('An error occured. Please try again later.');
-            }
-        }
-    };
-    return (
-        <div className="login-container">
-            <form onSubmit={handleLogin}>
-            <h1>Login</h1>  
-                <div className="form-content">
-                <label>
-                    Email:
-                </label>
-                    <input placeholder="Email.." type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <div className="form-content">
-                <label>
-                    Password: 
-                </label>
-                    <input placeholder="Password.." type={showPassowrd ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                </div>
-                <div className="show-password">
-                <input type="checkbox" className="hint-password" checked={showPassowrd} onChange={handleCheckboxChange}/>
-                <label className="show-label">show password</label>
-                </div>
-
-                <div className="submit-message">
-                <button type="submit">Login</button>
-                <p>{message}</p>
-                </div>
-            </form>
+  return (
+    <div className="login-container">
+        {/* <img src="3174411-uhd_3840_2160_30fps.mp4" alt="waste video"  className="image-background"/> */}
+      <form onSubmit={handleLogin}>
+        <h1>Login</h1>
+        <div className="form-content">
+          <label>Email:</label>
+          <input
+            type="email"
+            placeholder="Email.."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-    )
-}; 
+        <div className="form-content">
+          <label>Password:</label>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password.."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="show-password">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={handleCheckboxChange}
+          />
+          <label>Show password</label>
+        </div>
+        <div className="submit-message">
+          <button type="submit">Login</button>
+            {message && <p>{message}</p>}
+        </div>
 
+      </form>
+    </div>
+  );
+}
 
-export default LoginPage
-
+export default LoginPage;

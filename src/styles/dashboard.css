@@ -6,7 +6,8 @@
 .Sidebar {
     padding: 10px;
     background-color: aliceblue;
-    width: 200px;
+    height: auto;
+    width: auto;
 }
 
 .main-content {

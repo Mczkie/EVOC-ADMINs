@@ -1,6 +1,6 @@
 /* Apply a background image to the container */
 body {
-    background-image: url('../images/background.jpg');
+    /* background-image: url('../images/background.jpg'); */
     background-size: cover;
     background-position: center;
     margin: 0;
@@ -8,13 +8,39 @@ body {
   }
   
   .container {
-    padding: 20px;
+    padding: 10px;
     margin-top: 50px;
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap; /* Make it responsive */
   }
+
+  .widgetContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .chartSection {
+    background-color: rgba(248, 249, 250, 0.9); /* Slight transparency for background */
+    width: 85%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 5px;
+  }
+
+  .chartContainer {
+  width: 90%;      /* or fixed width like 800px */
+  max-width: 1000px;
+  height: 500px;   /* desired height */
+  margin: 0 auto;
+}
+
+
   
   .contentContainer {
     border-radius: 5px;

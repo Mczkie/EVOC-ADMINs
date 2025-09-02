@@ -1,55 +1,35 @@
-// import React, { useState } from 'react'
+import React from "react";
 
+function TableAction({ id, email, password, setUsers }) {
+  const handleDelete = async () => {
+    if (!window.confirm(`Are you sure you want to delete ${email}?`)) return;
 
-function TableAction({email, password}) {
-  // const [userDelete, setUserDelete] = useState();
-
-  const deleteButton = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/updateUser', {
-          method: 'POST',
-          headers: {
-              'Content-type': 'application/json',
-          },
-          body: JSON.stringify({ email:email,status:"Deleted",password : password }),
+      const response = await fetch("http://localhost:5001/api/users", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
       });
-      console.log(response);
-      if(response.ok){
-        alert("User Deleted")
+
+      if (response.ok) {
+        // Remove user from parent state
+        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+        console.log(`User ${email} deleted successfully`);
+      } else {
+        console.error("Failed to delete user");
       }
-   }catch(error) {
-    console.error('Error deleting users:', error);
-    alert('An occured during deleting users:'+ error);
-  }
-}
-
-const restoreButton = async () => {
-  try {
-    const response = await fetch('http://localhost:5000/api/updateUser', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ email:email,status:"Active",password : password }),
-    });
-    console.log(response);
-    if(response.ok){
-      alert("User Restored")
+    } catch (error) {
+      console.error("Error deleting user:", error);
     }
- }catch(error) {
-  console.error('Error restoring users:', error);
-  alert('An occured during restoring users:'+ error);
-}
-}
-
+  };
 
   return (
     <div id="action-container">
-      <button id="edit-btn">Edit</button>
-      <button id="delete-btn" onClick={deleteButton}>Delete</button>
-      <button id="restore-btn" onClick={restoreButton}>Restore</button>
+      <button id="delete-btn" onClick={handleDelete}>
+        Delete
+      </button>
     </div>
-  )
+  );
 }
 
-export default TableAction
+export default TableAction;

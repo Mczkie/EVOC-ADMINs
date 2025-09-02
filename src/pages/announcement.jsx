@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import '../styles/announcement.css';
+import React, { useEffect, useState } from "react";
+import "../styles/announcement.css";
+import Announcebutton from "../components/announceButton/announceButton";
 
 function Announcement() {
   const [announcements, setAnnouncements] = useState([]);
@@ -9,13 +10,13 @@ function Announcement() {
   const [successMessage, setSuccessMessage] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const reportsPerPage = 5; // You can change the number of rows per page here
+  const reportsPerPage = 3; // You can change the number of rows per page here
 
   useEffect(() => {
     // Fetch all announcements on component mount
     const fetchAnnouncements = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/announcements");
+        const response = await fetch("http://localhost:5001/api/announcement");
         if (!response.ok) throw new Error("Failed to fetch announcements");
         const data = await response.json();
         setAnnouncements(data);
@@ -37,23 +38,31 @@ function Announcement() {
       return;
     }
 
-    const newAnnouncement = { title, description };
+    // Format timestamp for MySQL DATETIME
+    const time_stamp = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+    const newAnnouncement = { title, description, time_stamp };
 
     try {
-      const response = await fetch("http://localhost:5000/api/newannouncements", {
+      const response = await fetch("http://localhost:5001/api/announcement", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newAnnouncement),
       });
 
-      if (!response.ok) throw new Error("Failed to create announcement");
-      const data = await response.json();
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Failed to create announcement");
+      }
 
-      setSuccessMessage("Announcement added successfully!");
-      setAnnouncements((prev) => [...prev, data]); // Add new announcement to state
+      const data = await response.json();
+      setAnnouncements((prev) => [...prev, data]);
       setTitle("");
       setDescription("");
+      setSuccessMessage("Announcement added successfully!");
+      setCurrentPage(1);
     } catch (err) {
+      console.error("Error submitting announcement:", err);
       setError("Error adding announcement");
     }
   };
@@ -64,7 +73,10 @@ function Announcement() {
   // Get current announcements based on pagination
   const indexOfLastAnnouncement = currentPage * reportsPerPage;
   const indexOfFirstAnnouncement = indexOfLastAnnouncement - reportsPerPage;
-  const currentAnnouncements = announcements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement);
+  const currentAnnouncements = announcements.slice(
+    indexOfFirstAnnouncement,
+    indexOfLastAnnouncement
+  );
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
@@ -74,7 +86,9 @@ function Announcement() {
   return (
     <div className="contentWrapper">
       <form className="announcementForm" onSubmit={handleSubmit}>
-        <h2 className="headingSche" style={{ color: 'black' }}>Announcements</h2>
+        <h2 className="headingSche" style={{ color: "black" }}>
+          Announcements
+        </h2>
         <input
           type="text"
           value={title}
@@ -101,14 +115,21 @@ function Announcement() {
               <th>Title</th>
               <th>Description</th>
               <th>Timestamp</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {currentAnnouncements.map((announcement) => (
               <tr key={announcement.id}>
                 <td>{announcement.title}</td>
-                <td>{announcement.description}</td>
+                <td className="AnnounceDescription">{announcement.description}</td>
                 <td>{announcement.time_stamp}</td>
+                <td>
+                  <Announcebutton
+                    id={announcement.id}
+                    setAnnouncements={setAnnouncements}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
@@ -122,7 +143,9 @@ function Announcement() {
           >
             Previous
           </button>
-          <span>{currentPage} / {totalPages}</span>
+          <span>
+            {currentPage} / {totalPages}
+          </span>
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
