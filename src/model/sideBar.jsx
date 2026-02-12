@@ -7,7 +7,6 @@ import {
   FaUserCircle,
   FaCalendarAlt,
   FaBullhorn,
-  FaFileAlt,
 } from "react-icons/fa";
 
 function Sidebar() {
