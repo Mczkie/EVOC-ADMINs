@@ -1,9 +1,17 @@
 import React from "react";
+import "../collectionButton/collectionButton.css";
 
-
-function CollectionButton({ id, location, setCollection }) {
+function CollectionButton({
+  id,
+  location,
+  street,
+  date,
+  setCollection,
+  onUpdate,
+}) {
   const handleDelete = async () => {
-    if (!window.confirm(`Are you sure you want to delete "${location}"?`)) return;
+    if (!window.confirm(`Are you sure you want to delete "${location}"?`))
+      return;
 
     try {
       const response = await fetch("http://localhost:5001/api/collection", {
@@ -13,9 +21,10 @@ function CollectionButton({ id, location, setCollection }) {
       });
 
       if (response.ok) {
-        // Remove report from parent state immediately
-        setCollection(prevCollection  => prevCollection.filter(collection => collection.id !== id));
-        console.log({ location, status: 'Deleted' });
+        setCollection((prevCollection) =>
+          prevCollection.filter((collection) => collection.id !== id)
+        );
+        console.log({ location, status: "Deleted" });
       } else {
         console.error("Failed to delete report");
       }
@@ -25,9 +34,18 @@ function CollectionButton({ id, location, setCollection }) {
   };
 
   return (
-    <button id="delete-btn" onClick={handleDelete}>
-      Delete
-    </button>
+    <div className="container">
+      <button id="delete-btn" onClick={handleDelete}>
+        Delete
+      </button>
+
+      <button
+        id="delete-btn"
+        onClick={() => onUpdate(id, location, street, date)}
+      >
+        Update
+      </button>
+    </div>
   );
 }
 

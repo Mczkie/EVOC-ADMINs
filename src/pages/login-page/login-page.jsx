@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/login-page.css";
+import "../login-page/login-page.css"
 
 function LoginPage() {
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -48,7 +50,6 @@ function LoginPage() {
 
   return (
     <div className="login-container">
-        {/* <img src="3174411-uhd_3840_2160_30fps.mp4" alt="waste video"  className="image-background"/> */}
       <form onSubmit={handleLogin}>
         <h1>Login</h1>
         <div className="form-content">

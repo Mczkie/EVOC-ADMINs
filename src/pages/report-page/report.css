@@ -1,0 +1,52 @@
+.wrapper {
+  padding: 20px 20px;
+}
+
+.formsidebar {
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.formsidebar input,
+.formsidebar textarea {
+  border-radius: 5px;
+  border: 2px solid #000;
+  margin-bottom: 10px;
+}
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  margin-top: 10px;
+  justify-content: flex-start;
+  bottom: 0;
+  color: black;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid gray;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.pagination .active {
+  background-color: #4caf50;
+  color: black;
+}
+
+.reportBody {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  overflow-x: auto;
+}

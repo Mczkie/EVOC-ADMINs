@@ -1,13 +1,15 @@
-import { BrowserRouter as Router, Route, Routes, BrowserRouter, } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import LoginPage from './pages/login-page';
-import Dashboard from './pages/dashboard';
-import Collection from './pages/collection';
-import Announcement from './pages/announcement';
-import Reports from './pages/reports';
-import Dashboardcontent from './pages/dashboard-content';
-import Users from './pages/users';
 
+// Pages
+import LoginPage from './pages/login-page/login-page';
+import Dashboard from './pages/dashboard/dashboard';
+import Collection from './pages/collection/collection';
+import Announcement from './pages/announcement/announcement';
+import Reports from './pages/report-page/reports';
+import Dashboardcontent from './pages/dashboard/dashboard-content';
+import MobileUsers from './pages/mobileUser/mobileuser';
+import Users from './pages/users/users';
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path='collection-schedule' element={<Collection />} />
           <Route path='announcement' element={<Announcement />} />
           <Route path='reports' element={<Reports />} />
+          <Route path='mobile-users' element={<MobileUsers />} />
         </Route>
       </Routes>
     </Router>

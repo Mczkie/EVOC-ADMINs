@@ -1,0 +1,16 @@
+.container {
+    padding: 0;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-top: 0;
+}
+
+#delete-btn {
+    background-color: #42A5F5;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: #000000;
+    width: 100px;
+}

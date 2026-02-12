@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../styles/announcement.css";
-import Announcebutton from "../components/announceButton/announceButton";
+import "../announcement/announcement.css";
+import Announcebutton from "../../components/announceButton/announceButton";
 
 function Announcement() {
   const [announcements, setAnnouncements] = useState([]);
@@ -8,9 +8,10 @@ function Announcement() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const reportsPerPage = 3; // You can change the number of rows per page here
+  const reportsPerPage = 5; // You can change the number of rows per page here
 
   useEffect(() => {
     // Fetch all announcements on component mount
@@ -85,28 +86,14 @@ function Announcement() {
 
   return (
     <div className="contentWrapper">
-      <form className="announcementForm" onSubmit={handleSubmit}>
-        <h2 className="headingSche" style={{ color: "black" }}>
-          Announcements
-        </h2>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Announcement Title"
-          required
-        />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Announcement Description"
-          required
-        />
-        <button type="submit">Add Announcement</button>
 
-        {error && <p className="error">{error}</p>}
-        {successMessage && <p className="success">{successMessage}</p>}
-      </form>
+      <div className="headers">
+        <h2>Announcement</h2>
+
+        <button className="Add" onClick={() => setShowModal(true)}>
+          Add New Announcement
+        </button>
+      </div>
 
       <div className="announcementList">
         <table className="announcementTable">
@@ -122,7 +109,9 @@ function Announcement() {
             {currentAnnouncements.map((announcement) => (
               <tr key={announcement.id}>
                 <td>{announcement.title}</td>
-                <td className="AnnounceDescription">{announcement.description}</td>
+                <td className="AnnounceDescription">
+                  {announcement.description}
+                </td>
                 <td>{announcement.time_stamp}</td>
                 <td>
                   <Announcebutton
@@ -153,6 +142,36 @@ function Announcement() {
             Next
           </button>
         </div>
+        
+        {/* modal */}
+        {showModal && (
+          <div className="modalOverlay">
+            <div className="modalContent">
+              <h2>Add Announcement</h2>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Announcement Title"
+                  required
+                />
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Announcement Description"
+                  required
+                />
+               <div className="button-container">
+                   <button type="submit">Submit</button>
+                <button type="button" onClick={() => setShowModal(false)}>
+                  Cancel
+                </button>
+               </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,239 @@
+* {
+  color: #000;
+}
+
+.contentWrapper {
+  padding: 20px 20px;
+ 
+}
+
+.announcementForm {
+  height: 30vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.announcementForm input {
+  padding: 20px 30px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.announcementForm textarea {
+  padding: 20px 30px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.announcementForm .Add {
+    padding: 10px;
+  background-color: #3656e3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+::placeholder {
+  color: #a7a8a7;
+}
+
+
+.announcementList {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  overflow-x: auto;
+}
+
+/* Table styling */
+.announcementTable {
+    width: 100%;
+  margin-bottom: 10px; /* Ensures some space between table and pagination */
+}
+
+/* Table Header */
+.announcementTable th {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+  color: white;
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Table Cells */
+.announcementTable td {
+  color: #333;
+}
+
+/* Description Cell Scroll */
+.AnnounceDescription {
+  max-width: 250px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Hover Effect */
+.announcementTable tr:hover {
+  background-color: #f9fbff;
+  transition: background-color 0.25s ease;
+}
+
+/* Table Rows with zebra effect */
+.announcementTable tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Rounded corners for first and last cells */
+.announcementTable thead tr th:first-child {
+  border-top-left-radius: 12px;
+}
+.announcementTable thead tr th:last-child {
+  border-top-right-radius: 12px;
+}
+
+/* Scrollbar Styling */
+.announcementList::-webkit-scrollbar {
+  height: 8px;
+}
+.announcementList::-webkit-scrollbar-thumb {
+  background: #90caf9;
+  border-radius: 10px;
+}
+.announcementList::-webkit-scrollbar-thumb:hover {
+  background: #42a5f5;
+}
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-start; 
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+}
+
+.pagination .active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.modalOverlay {
+ position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.55); /* subtle dark blur */
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  padding: auto;
+}
+
+.modalContent {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: auto;
+  max-width: 50%;
+  padding: 30px;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form {
+  width: auto;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.modalContent input,
+.modalContent textarea {
+  width: 45vw;
+  height: 10vh;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+}
+.button-container button {
+  padding: 10px 20px;
+  background-color: #899ae8;
+  font-weight: 700;
+  border: 1px solid #000;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 10vw;
+}
+
+.button-container button:hover {
+  background-color: #7086e7;
+}
+
+.headers {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.headers h2 {
+  font-weight: 700;
+}
+
+.headers button {
+  padding: 10px 20px;
+  background-color: #3656e3;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

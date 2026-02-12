@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../styles/report.css";
-import ReportButton from "../components/reportButton/reportButton";
+import "../report-page/report.css"
+import ReportButton from "../../components/reportButton/reportButton";
 
 
 function Reports() {
@@ -9,6 +9,7 @@ function Reports() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const reportsPerPage = 5;
@@ -73,8 +74,22 @@ function Reports() {
 
   return (
     <div className="wrapper">
-      <div className="form-container">
-        <form className="formsidebar" onSubmit={handleSubmit}>
+      <div className="headers">
+        <h1>Reports</h1>
+        <button className="addReportButton" onClick={() => setShowModal(true)}>
+          Add Report
+        </button>
+      </div>
+
+      {showModal && (
+        <div className="modalOverlay">
+          <div className="modalContent">
+            <h2>Add New Report</h2>
+            {error && <p className="errorMessage">{error}</p>}
+            {successMessage && (
+              <p className="successMessage">{successMessage}</p>
+            )}
+            <form className="formsidebar" onSubmit={handleSubmit}>
           <input
             type="text"
             value={title}
@@ -86,11 +101,16 @@ function Reports() {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Report Description"
           />
-          <button type="submit">Submit</button>
+          <div className="buttons">
+            <button type="submit">Submit</button>
+            <button onClick={()=> setShowModal(false)}>Cancel</button>
+          </div>
           {error && <p className="error">{error}</p>}
           {successMessage && <p className="success">{successMessage}</p>}
         </form>
-      </div>
+            </div>
+            </div>
+            )}
 
       <div className="table-container">
         <div className="reportBody">
@@ -123,10 +143,9 @@ function Reports() {
                 ))
               )}
             </tbody>
+            
           </table>
-        </div>
-
-        <div className="pagination">
+          <div className="pagination">
           <button
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
@@ -141,6 +160,8 @@ function Reports() {
             Next
           </button>
         </div>
+        </div>
+
       </div>
     </div>
   );

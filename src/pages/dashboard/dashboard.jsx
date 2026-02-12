@@ -1,6 +1,6 @@
 import React from 'react'
-import Sidebar from '../model/sideBar';
-import '../styles/dashboard.css';
+import Sidebar from '../../model/sideBar';
+import '../dashboard/dashboard.css';
 import { Outlet } from 'react-router-dom';
 // import Dashboardcontent from './dashboard-content';
 

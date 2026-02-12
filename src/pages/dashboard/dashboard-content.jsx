@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
-import '../styles/dashContent.css';
-import DashboardChart from '../components/chart/chart';
+import '../dashboard/dashContent.css'
+import DashboardChart from '../../components/chart/chart';
+import Report from '../report-page/reports.jsx';
+import Collection from '../collection/collection.jsx';
+import Announcement from '../announcement/announcement.jsx';
+import Users from '../users/users.jsx';
 
 
 function DashboardContent() {
@@ -8,26 +12,32 @@ function DashboardContent() {
   const [reportsCount, setReportsCount] = useState(0);
   const [announcementCount, setAnnouncementCount] = useState(0);
   const [collectionCount, setCollectionCount] = useState(0);
+  const [mobileUserCount, setMobileUserCount] = useState(0);
   const [widgets, setWidgets] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userResponse, reportsResponse, announcementResponse, collectionResponse] = await Promise.all([
+        const [userResponse, reportsResponse, announcementResponse, collectionResponse, mobileUserResponse] = await Promise.all([
           fetch("http://localhost:5001/api/users"),
           fetch("http://localhost:5001/api/reports"),
           fetch("http://localhost:5001/api/announcement"),
-          fetch("http://localhost:5001/api/collection")
+          fetch("http://localhost:5001/api/collection"),
+          fetch("http://localhost:5001/api/mobileuser"),
         ]);
 
         if (!userResponse.ok) throw new Error("Failed to fetch users");
         if (!reportsResponse.ok) throw new Error("Failed to fetch reports");
+        if (!announcementResponse.ok) throw new Error("Failed to fetch announcements");
+        if (!collectionResponse.ok) throw new Error("Failed to fetch collections");
+        if(!mobileUserResponse.ok) throw new Error("Failed to fetch mobile users");
 
         const userData = await userResponse.json();
         const reportsData = await reportsResponse.json();
         const announcementData = await announcementResponse.json();
         const collectionData = await collectionResponse.json();
+        const mobileUserData = await mobileUserResponse.json();
 
         setUserCount(userData.length);
         setReportsCount(reportsData.length);
@@ -36,9 +46,9 @@ function DashboardContent() {
 
         setWidgets([
           { title: 'Users', count: userData.length },
-          { title: 'Reports', count: reportsData.length },
           { title: 'Announcements', count: announcementData.length },
-          { title: 'Collections', count: collectionData.length }
+          { title: 'Collections', count: collectionData.length },
+          { title: 'Mobile Users', count: mobileUserData.length }
         ]);
       } catch (error) {
         console.error("Error fetching data", error);

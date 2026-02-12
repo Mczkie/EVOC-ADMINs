@@ -1,37 +1,28 @@
-table {
-  width: 90%;
-  border-collapse: collapse;
+.tableSection {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  overflow-x: auto;
 }
 
-th,
-td {
-  border: 1px solid #000;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
 
 .Table-container {
   color: black;
-  padding: 40px;
+  padding: 10px 20px;
   padding-bottom: 50px; /* Add space for the pagination controls */
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
   margin-bottom: 10px; /* Ensures some space between table and pagination */
 }
 
 th,
 td {
+  border: 1px solid #000;
   padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
 }
 
 .paginationuser {
@@ -45,7 +36,7 @@ td {
 .paginationuser button {
   padding: 5px 10px;
   cursor: pointer;
-  background-color: #007bff;
+   background: #ffffff;
   color: black; /* Set pagination text to black */
   border: none;
   border-radius: 3px;
@@ -62,22 +53,63 @@ td {
   color: black; /* Set pagination text to black */
 }
 
+/* adding new users */
 .newuser-section {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  
 }
 
 .NewUser {
   border-radius: 10px;
-  width: 50%;
+  width: 45vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffff;
 }
 .NewUser input {
-  padding: 20px 0px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  font-size: 13px;
+  width: 44vw;
+
 }
 
-.NewUser .roles {
+select {
+  width: 45.5vw;
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+}
+
+
+
+.modalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modalButtons button {
+  padding: 10px 20px;
+  background-color: #899ae8;
+  font-weight: 700;
+  border: 1px solid #000;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 10vw;
+}
+
+.paginationbutton {
   padding: 10px;
+  background-color: #007bff;
 }

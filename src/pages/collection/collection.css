@@ -1,0 +1,157 @@
+.scheduleWrapper {
+  padding: 10px 20px;
+}
+
+.scheduleCard {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.scheduleForm {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  height: 30vh;
+  margin-bottom: 10px;
+}
+
+.scheduleForm input {
+  border-radius: 5px;
+  border: 2px solid #000;
+  margin-bottom: 10px;
+}
+
+.modalContent .buttons{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.buttons button{
+  width: 10vw;
+  padding: 10px;
+  background-color: #3656e3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Table Container */
+.table-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  width: 100%;
+  margin: 20px auto;
+  overflow-x: auto;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #333;
+}
+
+/* Header */
+th {
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  color: white;
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Table Data */
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+/* Zebra Stripes */
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Hover Row */
+tbody tr:hover {
+  background-color: #f1f7ff;
+}
+
+/* Rounded Header Corners */
+thead tr:first-child th:first-child {
+  border-top-left-radius: 12px;
+}
+
+thead tr:first-child th:last-child {
+  border-top-right-radius: 12px;
+}
+
+/* Add some subtle hover animation */
+tbody tr {
+  transition: all 0.2s ease;
+}
+
+/* Make it responsive */
+@media (max-width: 768px) {
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 10px 12px;
+  }
+}
+
+/* Scrollbar styling for horizontal overflow */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #90caf9;
+  border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #42a5f5;
+}
+
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  position: relative; 
+  margin-top: 10px; 
+  justify-content: flex-start;
+  bottom: 0; 
+  color: black; 
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid gray;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+  color: black; 
+}
+
+.pagination .active {
+  background-color: #4CAF50;
+  color: black; 
+}
