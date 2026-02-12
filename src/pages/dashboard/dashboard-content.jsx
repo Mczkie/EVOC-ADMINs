@@ -8,11 +8,11 @@ import Users from '../users/users.jsx';
 
 
 function DashboardContent() {
-  const [userCount, setUserCount] = useState(0);
-  const [reportsCount, setReportsCount] = useState(0);
-  const [announcementCount, setAnnouncementCount] = useState(0);
-  const [collectionCount, setCollectionCount] = useState(0);
-  const [mobileUserCount, setMobileUserCount] = useState(0);
+  // const [userCount, setUserCount] = useState(0);
+  // const [reportsCount, setReportsCount] = useState(0);
+  // const [announcementCount, setAnnouncementCount] = useState(0);
+  // const [collectionCount, setCollectionCount] = useState(0);
+  // const [mobileUserCount, setMobileUserCount] = useState(0);
   const [widgets, setWidgets] = useState([]);
   const [error, setError] = useState(null);
 
