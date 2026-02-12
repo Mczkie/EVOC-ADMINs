@@ -9,7 +9,7 @@ function DashboardContent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const API_URL = process.env.REACT_APP_API_URL; // <- Use environment variable
+        const API_URL = process.env.REACT_APP_API_URL;
         const [userRes, reportsRes, announcementRes, collectionRes, mobileUserRes] = await Promise.all([
           fetch(`${API_URL}/users`),
           fetch(`${API_URL}/reports`),
