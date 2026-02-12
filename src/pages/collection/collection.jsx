@@ -136,6 +136,7 @@ function Collection() {
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ location, street, date: collectionDate }),
       }
     );

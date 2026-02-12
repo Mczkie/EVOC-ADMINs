@@ -17,7 +17,10 @@ function Announcement() {
     // Fetch all announcements on component mount
     const fetchAnnouncements = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/announcement`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/announcement`, {
+          credentials: "include",
+        });
+        
         if (!response.ok) throw new Error("Failed to fetch announcements");
         const data = await response.json();
         setAnnouncements(data);
