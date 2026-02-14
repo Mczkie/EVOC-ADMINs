@@ -132,11 +132,10 @@ function Collection() {
 
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/collection/${id}`,
+      `http://localhost:5001/api/collection/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({ location, street, date: collectionDate }),
       }
     );
