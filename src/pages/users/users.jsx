@@ -5,14 +5,21 @@ import TableAction from "../../components/table-action";
 function Users() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [revealPassword, setRevealPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const usersPerPage = 5;
 
+   const handleCheckboxChange = () => {
+    setShowPassword(!showPassword);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://evoc-backends.onrender.com/api/users");
+        const response = await fetch(
+          "https://evoc-backends.onrender.com/api/users",
+        );
         const contentType = response.headers.get("content-type");
 
         if (!contentType || !contentType.includes("application/json")) {
@@ -127,7 +134,7 @@ function Users() {
                           "Content-Type": "application/json",
                         },
                         body: JSON.stringify(newUser),
-                      }
+                      },
                     );
 
                     if (!response.ok) {
@@ -144,7 +151,6 @@ function Users() {
                   }
                 }}
               >
-                
                 <input type="email" name="email" placeholder="Email" required />
                 <input
                   type="password"
@@ -158,11 +164,14 @@ function Users() {
                   <option value="admin">Admin</option>
                   <option value="staff">Staff</option>
                 </select>
+                <h5><input
+                  type="checkbox"
+                  checked={showPassword}
+                  onChange={handleCheckboxChange}
+                />Show password </h5>
                 <div className="modalButtons">
-                  <button type="submit">
-                  Add User
-                </button>
-                <button onClick={() => setShowModal(false)}>Cancel</button>
+                  <button type="submit">Add User</button>
+                  <button onClick={() => setShowModal(false)}>Cancel</button>
                 </div>
                 {message && <p>{message}</p>}
               </form>
