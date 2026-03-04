@@ -8,6 +8,7 @@ function Announcement() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
