@@ -5,12 +5,13 @@ import TableAction from "../../components/table-action";
 function Users() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [revealPassword, setRevealPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const usersPerPage = 5;
 
    const handleCheckboxChange = () => {
-    setShowPassword(!showPassword);
+    setRevealPassword(!revealPassword);
   };
 
   useEffect(() => {
@@ -165,7 +166,7 @@ function Users() {
                 </select>
                 <h5><input
                   type="checkbox"
-                  checked={showPassword}
+                  checked={revealPassword}
                   onChange={handleCheckboxChange}
                 />Show password </h5>
                 <div className="modalButtons">

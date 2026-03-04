@@ -167,6 +167,7 @@ function Announcement() {
                 <button type="button" onClick={() => setShowModal(false)}>
                   Cancel
                 </button>
+                {message && <p>{message}</p>}
                </div>
               </form>
             </div>
