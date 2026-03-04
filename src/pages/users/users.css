@@ -113,3 +113,13 @@ select {
   padding: 10px;
   background-color: #007bff;
 }
+
+
+
+
+.eyeButton {
+  position: absolute;
+  top: 35%;
+  right: 25px;
+  border: none
+}

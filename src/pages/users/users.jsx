@@ -10,7 +10,7 @@ function Users() {
   const [showModal, setShowModal] = useState(false);
   const usersPerPage = 5;
 
-   const handleCheckboxChange = () => {
+  const handleCheckboxChange = () => {
     setRevealPassword(!revealPassword);
   };
 
@@ -113,11 +113,13 @@ function Users() {
           <div className="modalOverlay">
             <div className="modalContent">
               <h2>Add New Admin or Staff</h2>
-              {message && <p className="message">{message}</p>}
+
               <form
                 className="NewUser"
                 onSubmit={async (e) => {
                   e.preventDefault();
+                  setMessage("");
+
                   const formData = new FormData(e.target);
                   const newUser = {
                     email: formData.get("email"),
@@ -125,6 +127,7 @@ function Users() {
                     role: formData.get("role"),
                     name: formData.get("name"),
                   };
+
                   try {
                     const response = await fetch(
                       "https://evoc-backends.onrender.com/api/admin",
@@ -137,43 +140,65 @@ function Users() {
                       },
                     );
 
+                    const addedUser = await response.json();
+
                     if (!response.ok) {
                       setMessage("New Admin or Staff failed to add!");
-                    } else {
-                      setMessage("New Admin or Staff added successfully!");
+                      return;
                     }
 
-                    const addedUser = await response.json();
                     setUsers((prevUsers) => [...prevUsers, addedUser]);
-                    e.target.reset(); // Clear the form
+                    setMessage("New Admin or Staff added successfully!");
+                    e.target.reset();
+                    setRevealPassword(false);
                   } catch (error) {
                     console.error("Error adding user:", error);
+                    setMessage("Server error. Please try again.");
                   }
                 }}
               >
                 <input type="email" name="email" placeholder="Email" required />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  required
-                />
+
+                {/* Password Field with Toggle */}
+                <div className="passwordField">
+                  <input
+                    type={revealPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setRevealPassword(!revealPassword)}
+                    className="eyeButton"
+                  >
+                    {revealPassword ? "🙈" : "👁"}
+                  </button>
+                </div>
+
                 <input type="text" name="name" placeholder="Name" required />
+
                 <select name="role" className="roles" required>
                   <option value="">Select Role</option>
                   <option value="admin">Admin</option>
                   <option value="staff">Staff</option>
                 </select>
-                <h5><input
-                  type="checkbox"
-                  checked={revealPassword}
-                  onChange={handleCheckboxChange}
-                />Show password </h5>
+
                 <div className="modalButtons">
                   <button type="submit">Add User</button>
-                  <button onClick={() => setShowModal(false)}>Cancel</button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowModal(false);
+                      setMessage("");
+                      setRevealPassword(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </div>
-                {message && <p>{message}</p>}
+
+                {message && <p className="message">{message}</p>}
               </form>
             </div>
           </div>
