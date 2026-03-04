@@ -22,7 +22,7 @@ function Collection() {
   // Fetch schedules from backend
   const fetchSchedules = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/collection");
+      const response = await fetch("https://evoc-backends.onrender.com/api/collection");
       if (!response.ok) throw new Error("Failed to fetch schedules");
       const data = await response.json();
       setSchedules(data);
@@ -132,7 +132,7 @@ function Collection() {
 
   try {
     const response = await fetch(
-      `http://localhost:5001/api/collection/${id}`,
+      `hhttps://evoc-backends.onrender.com/api/collection/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

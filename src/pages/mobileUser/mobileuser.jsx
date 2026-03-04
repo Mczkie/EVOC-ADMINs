@@ -6,7 +6,7 @@ function MobileUsers() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/mobileuser")
+    fetch("https://evoc-backends.onrender.com/api/mobileuser")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch users");

@@ -41,7 +41,7 @@ function Reports() {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/reports", {
+      const response = await fetch("https://evoc-backends.onrender.com/api/reports", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description }),
