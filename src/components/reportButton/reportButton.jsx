@@ -5,7 +5,7 @@ function ReportButton({ id, title, setReports }) {
     if (!window.confirm(`Are you sure you want to delete "${title}"?`)) return;
 
     try {
-      const response = await fetch("http://localhost:5001/api/reports", {
+      const response = await fetch("https://evoc-backends.onrender.com/api/reports", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),

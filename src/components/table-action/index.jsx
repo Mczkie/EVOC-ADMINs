@@ -5,7 +5,7 @@ function TableAction({ id, email, password, setUsers }) {
     if (!window.confirm(`Are you sure you want to delete ${email}?`)) return;
 
     try {
-      const response = await fetch("http://localhost:5001/api/users", {
+      const response = await fetch("https://evoc-backends.onrender.com/api/users", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),

@@ -54,7 +54,7 @@ function Collection() {
     const newSchedule = { location, street: street, date: collectionDate }; // match backend
 
     try {
-      const response = await fetch("http://localhost:5001/api/collection", {
+      const response = await fetch("https://evoc-backends.onrender.com/api/collection", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newSchedule),

@@ -14,7 +14,7 @@ function CollectionButton({
       return;
 
     try {
-      const response = await fetch("http://localhost:5001/api/collection", {
+      const response = await fetch("https://evoc-backends.onrender.com/api/collection", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),

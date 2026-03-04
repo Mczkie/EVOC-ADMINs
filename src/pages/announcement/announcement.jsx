@@ -45,7 +45,7 @@ function Announcement() {
     const newAnnouncement = { title, description, time_stamp };
 
     try {
-      const response = await fetch("http://localhost:5001/api/announcement", {
+      const response = await fetch("https://evoc-backends.onrender.com/api/announcement", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newAnnouncement),

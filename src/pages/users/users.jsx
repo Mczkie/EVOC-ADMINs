@@ -120,7 +120,7 @@ function Users() {
                   };
                   try {
                     const response = await fetch(
-                      "http://localhost:5001/api/admin",
+                      "https://evoc-backends.onrender.com/api/admin",
                       {
                         method: "POST",
                         headers: {

@@ -16,7 +16,7 @@ function Reports() {
 
   const fetchReports = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/reports");
+      const response = await fetch("https://evoc-backends.onrender.com/api/reports");
       if (!response.ok) throw new Error("Failed to fetch reports");
       const data = await response.json();
       setReports(data);

@@ -3,7 +3,7 @@ function AnnouncementButton({ id, setAnnouncements }) {
     if (!window.confirm("Are you sure you want to delete this announcement?")) return;
 
     try {
-      const response = await fetch("http://localhost:5001/api/announcement", {
+      const response = await fetch("https://evoc-backends.onrender.com/api/announcement", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
