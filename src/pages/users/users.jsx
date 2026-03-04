@@ -5,7 +5,6 @@ import TableAction from "../../components/table-action";
 function Users() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [revealPassword, setRevealPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const usersPerPage = 5;
