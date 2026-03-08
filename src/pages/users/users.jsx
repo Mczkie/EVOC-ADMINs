@@ -14,26 +14,26 @@ function Users() {
     setRevealPassword(!revealPassword);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://evoc-backends.onrender.com/api/users",
-        );
-        const contentType = response.headers.get("content-type");
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://evoc-backends.onrender.com/api/users",
+      );
+      const contentType = response.headers.get("content-type");
 
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Response is not JSON");
-        }
-
-        const data = await response.json();
-        setUsers(Array.isArray(data) ? data : data.users || []);
-      } catch (error) {
-        console.error("Fetch error:", error);
-        setUsers([]);
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Response is not JSON");
       }
-    };
 
+      const data = await response.json();
+      setUsers(Array.isArray(data) ? data : data.users || []);
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setUsers([]);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -147,10 +147,11 @@ function Users() {
                       return;
                     }
 
-                    setUsers((prevUsers) => [...prevUsers, addedUser]);
+                    await fetchData(); // 🔥 reload users from database
                     setMessage("New Admin or Staff added successfully!");
                     e.target.reset();
                     setRevealPassword(false);
+                    setShowModal(false);
                   } catch (error) {
                     console.error("Error adding user:", error);
                     setMessage("Server error. Please try again.");
