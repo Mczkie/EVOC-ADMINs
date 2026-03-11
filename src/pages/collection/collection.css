@@ -2,6 +2,10 @@
   padding: 10px 20px;
 }
 
+.scheduleWrapper button {
+  margin-bottom: 10px;
+}
+
 .scheduleCard {
   background: #ffffff;
   border-radius: 10px;
@@ -154,4 +158,19 @@ tbody tr {
 .pagination .active {
   background-color: #4CAF50;
   color: black; 
+}
+
+
+button {
+  padding: 10px 20px;
+  background-color: #3656e3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.pagination button{
+  color: black;
 }

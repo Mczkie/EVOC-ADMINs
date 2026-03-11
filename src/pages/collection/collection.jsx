@@ -1,385 +1,238 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../collection/collection.css";
-import CollectionButton from "../../components/collectionButton/collectionButton";
 
 function Collection() {
-  const [schedules, setSchedules] = useState([]);
-  const [location, setLocation] = useState("");
-  const [street, setStreet] = useState("");
-  const [collectionDate, setCollectionDate] = useState("");
-
+  const [fixedSchedules, setFixedSchedules] = useState([]);
+  const [barangay, setBarangay] = useState("");
+  const [scheduleText, setScheduleText] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const [showModal, setShowModal] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showFixedModal, setShowFixedModal] = useState(false);
+  const [showFixedUpdateModal, setShowFixedUpdateModal] = useState(false);
 
-  const firstInputRef = useRef(null);
-  const updateRef = useRef(null);
+  const fixedUpdateRef = useRef(null);
+
+  const FIXED_API = "https://evoc-backends.onrender.com/api/fixedschedule";
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const schedulesPerPage = 5;
+  const schedulesPerPage = 9;
 
-  const API = "https://evoc-backends.onrender.com/api/collection";
-
-  // Fetch schedules
-  const fetchSchedules = async () => {
+  // Fetch fixed schedules
+  const fetchFixedSchedules = async () => {
     try {
-      const response = await fetch(API);
-      if (!response.ok) throw new Error("Failed to fetch schedules");
-
-      const data = await response.json();
-      setSchedules(data);
-
+      const res = await fetch(FIXED_API);
+      const data = await res.json();
+      setFixedSchedules(data);
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch schedules");
     }
   };
 
   useEffect(() => {
-    fetchSchedules();
-
-    if (firstInputRef.current) {
-      firstInputRef.current.focus();
-    }
+    fetchFixedSchedules();
   }, []);
 
-  // ADD schedule
-  const handleSubmit = async (e) => {
+  // Auto-clear messages
+  useEffect(() => {
+    if (successMessage || error) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+        setError("");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage, error]);
+
+  // Pagination calculation
+  const totalPages = Math.ceil(fixedSchedules.length / schedulesPerPage);
+  const indexOfLast = currentPage * schedulesPerPage;
+  const indexOfFirst = indexOfLast - schedulesPerPage;
+  const currentSchedules = fixedSchedules.slice(indexOfFirst, indexOfLast);
+
+  // ----------------- FIXED SCHEDULE CRUD -----------------
+  const handleSubmitFixed = async (e) => {
     e.preventDefault();
-
-    setError("");
-    setSuccessMessage("");
-
-    if (!location || !street || !collectionDate) {
-      setError("Location, Street and Collection Date are required!");
+    if (!barangay || !scheduleText) {
+      setError("Barangay and Schedule are required!");
       return;
     }
 
-    const newSchedule = {
-      location,
-      street,
-      date: collectionDate,
-    };
-
     try {
-      const response = await fetch(API, {
+      const res = await fetch(FIXED_API, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newSchedule),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ barangay, schedule: scheduleText }),
       });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || "Failed to add");
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
-      setSchedules((prev) => [...prev, data]);
-
-      setSuccessMessage("Schedule added successfully!");
-
-      setLocation("");
-      setStreet("");
-      setCollectionDate("");
-
-      setCurrentPage(1);
-      setShowModal(false);
-
+      setFixedSchedules((prev) => [...prev, data]);
+      setShowFixedModal(false);
+      setBarangay("");
+      setScheduleText("");
+      setSuccessMessage("Fixed schedule added!");
     } catch (err) {
-      console.error(err);
       setError(err.message);
     }
   };
 
-  // UPDATE schedule
-  const handleUpdate = async (e) => {
+  const handleUpdateFixed = async (e) => {
     e.preventDefault();
-
-    setError("");
-    setSuccessMessage("");
-
-    const id = updateRef.current;
-
-    if (!id) {
-      setError("Invalid schedule ID");
-      return;
-    }
+    const id = fixedUpdateRef.current;
+    if (!id) return;
 
     try {
-      const response = await fetch(`${API}/${id}`, {
+      const res = await fetch(`${FIXED_API}/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          location,
-          street,
-          date: collectionDate,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ barangay, schedule: scheduleText }),
       });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || "Failed to update");
 
-      const updatedData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(updatedData.message);
-      }
-
-      setSchedules((prev) =>
-        prev.map((item) => (item.id === id ? updatedData : item))
+      setFixedSchedules((prev) =>
+        prev.map((item) => (item.id === id ? data : item))
       );
-
-      setSuccessMessage("Schedule updated successfully!");
-
-      setShowUpdateModal(false);
-
-      setLocation("");
-      setStreet("");
-      setCollectionDate("");
-
-      updateRef.current = null;
-
+      setShowFixedUpdateModal(false);
+      fixedUpdateRef.current = null;
+      setBarangay("");
+      setScheduleText("");
+      setSuccessMessage("Fixed schedule updated!");
     } catch (err) {
-      console.error(err);
       setError(err.message);
     }
   };
 
-  // Pagination
-  const totalPages = Math.ceil(schedules.length / schedulesPerPage);
-  const indexOfLastSchedule = currentPage * schedulesPerPage;
-  const indexOfFirstSchedule = indexOfLastSchedule - schedulesPerPage;
-
-  const currentSchedules = schedules.slice(
-    indexOfFirstSchedule,
-    indexOfLastSchedule
-  );
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const handleDeleteFixed = async (id) => {
+    try {
+      await fetch(`${FIXED_API}/${id}`, { method: "DELETE" });
+      setFixedSchedules((prev) => prev.filter((item) => item.id !== id));
+      setSuccessMessage("Fixed schedule deleted!");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
     <div className="scheduleWrapper">
+      <h2>📅 Fixed Collection Schedules</h2>
+      <button className="add-fixed" onClick={() => setShowFixedModal(true)}>
+        Add Fixed Schedule
+      </button>
 
-      <div className="headers">
-        <h2>Collection Schedules</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Barangay</th>
+            <th>Schedule</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentSchedules.map((sched) => (
+            <tr key={sched.id}>
+              <td>{sched.barangay}</td>
+              <td>{sched.schedule}</td>
+              <td>
+                <button
+                  onClick={() => {
+                    setBarangay(sched.barangay);
+                    setScheduleText(sched.schedule);
+                    fixedUpdateRef.current = sched.id;
+                    setShowFixedUpdateModal(true);
+                  }}
+                >
+                  Update
+                </button>
+                <button onClick={() => handleDeleteFixed(sched.id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-        <button onClick={() => setShowModal(true)}>
-          Add new collection schedule
+      {/* Pagination Controls */}
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          {currentPage} / {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+          disabled={currentPage === totalPages || totalPages === 0}
+        >
+          Next
         </button>
       </div>
 
-      <div className="scheduleCard">
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Location</th>
-              <th>Street</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            {currentSchedules.length === 0 ? (
-
-              <tr>
-                <td colSpan="4">No schedules available</td>
-              </tr>
-
-            ) : (
-
-              currentSchedules.map((schedule) => (
-
-                <tr key={schedule.id}>
-
-                  <td>{schedule.location}</td>
-
-                  <td>{schedule.street}</td>
-
-                  <td>
-                    {new Date(schedule.date).toLocaleDateString()}
-                  </td>
-
-                  <td>
-
-                    <CollectionButton
-                      id={schedule.id}
-                      location={schedule.location}
-                      street={schedule.street}
-                      date={schedule.date}
-                      setCollection={setSchedules}
-                      onUpdate={(id, location, street, date) => {
-
-                        setLocation(location);
-                        setStreet(street);
-                        setCollectionDate(date.split("T")[0]);
-
-                        updateRef.current = id;
-
-                        setShowUpdateModal(true);
-                      }}
-                    />
-
-                  </td>
-
-                </tr>
-
-              ))
-
-            )}
-
-          </tbody>
-
-        </table>
-
-        {/* Pagination */}
-
-        <div className="pagination">
-
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-
-          <span>
-            {currentPage} / {totalPages}
-          </span>
-
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-
-        </div>
-
-      </div>
-
-      {/* ADD MODAL */}
-
-      {showModal && (
-
+      {/* ADD FIXED MODAL */}
+      {showFixedModal && (
         <div className="modalOverlay">
-
           <div className="modalContent">
-
-            <h2>Add New Collection Schedule</h2>
-
-            <form onSubmit={handleSubmit} className="scheduleForm">
-
+            <h2>Add Fixed Schedule</h2>
+            <form onSubmit={handleSubmitFixed}>
               <input
-                ref={firstInputRef}
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder="Location"
+                value={barangay}
+                onChange={(e) => setBarangay(e.target.value)}
+                placeholder="Barangay"
                 required
               />
-
               <input
-                type="text"
-                value={street}
-                onChange={(e) => setStreet(e.target.value)}
-                placeholder="Street"
+                value={scheduleText}
+                onChange={(e) => setScheduleText(e.target.value)}
+                placeholder="Schedule"
                 required
               />
-
-              <input
-                type="date"
-                value={collectionDate}
-                onChange={(e) => setCollectionDate(e.target.value)}
-              />
-
-              <div className="buttons">
-
-                <button type="submit">
-                  Add
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </button>
-
-              </div>
-
+              <button type="submit">Add</button>
+              <button type="button" onClick={() => setShowFixedModal(false)}>
+                Cancel
+              </button>
             </form>
-
           </div>
-
         </div>
-
       )}
 
-      {/* UPDATE MODAL */}
-
-      {showUpdateModal && (
-
+      {/* UPDATE FIXED MODAL */}
+      {showFixedUpdateModal && (
         <div className="modalOverlay">
-
           <div className="modalContent">
-
-            <h2>Update Collection Schedule</h2>
-
-            <form onSubmit={handleUpdate} className="scheduleForm">
-
+            <h2>Update Fixed Schedule</h2>
+            <form onSubmit={handleUpdateFixed}>
               <input
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                value={barangay}
+                onChange={(e) => setBarangay(e.target.value)}
+                placeholder="Barangay"
                 required
               />
-
               <input
-                type="text"
-                value={street}
-                onChange={(e) => setStreet(e.target.value)}
+                value={scheduleText}
+                onChange={(e) => setScheduleText(e.target.value)}
+                placeholder="Schedule"
                 required
               />
-
-              <input
-                type="date"
-                value={collectionDate}
-                onChange={(e) => setCollectionDate(e.target.value)}
-              />
-
-              <div className="buttons">
-
-                <button type="submit">
-                  Update
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setShowUpdateModal(false)}
-                >
-                  Cancel
-                </button>
-
-              </div>
-
+              <button type="submit">Update</button>
+              <button
+                type="button"
+                onClick={() => setShowFixedUpdateModal(false)}
+              >
+                Cancel
+              </button>
             </form>
-
           </div>
-
         </div>
-
       )}
 
+      {error && <p className="error">{error}</p>}
+      {successMessage && <p className="success">{successMessage}</p>}
     </div>
   );
 }

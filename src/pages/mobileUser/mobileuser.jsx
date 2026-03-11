@@ -5,7 +5,10 @@ function MobileUsers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // ✅ fetchData function
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 15;
+
   const fetchData = async () => {
     setLoading(true);
     setError(null);
@@ -23,7 +26,6 @@ function MobileUsers() {
     }
   };
 
-  // ✅ useEffect to run once and optionally auto reload
   useEffect(() => {
     fetchData();
 
@@ -31,8 +33,14 @@ function MobileUsers() {
       fetchData(); // auto reload every 5 seconds
     }, 5000);
 
-    return () => clearInterval(interval); // cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
+
+  // Pagination calculation
+  const totalPages = Math.ceil(users.length / usersPerPage);
+  const indexOfLast = currentPage * usersPerPage;
+  const indexOfFirst = indexOfLast - usersPerPage;
+  const currentUsers = users.slice(indexOfFirst, indexOfLast);
 
   if (loading) return <p>Loading users...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -50,12 +58,12 @@ function MobileUsers() {
           </tr>
         </thead>
         <tbody>
-          {users.length === 0 ? (
+          {currentUsers.length === 0 ? (
             <tr>
               <td colSpan="3">No users found</td>
             </tr>
           ) : (
-            users.map((user) => (
+            currentUsers.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
@@ -65,6 +73,25 @@ function MobileUsers() {
           )}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <div style={{ marginTop: "10px" }}>
+        <button
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span style={{ margin: "0 10px" }}>
+          {currentPage} / {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+          disabled={currentPage === totalPages || totalPages === 0}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
