@@ -23,7 +23,7 @@ function DashboardContent() {
           fetch("https://evoc-backends.onrender.com/api/users"),
           fetch("https://evoc-backends.onrender.com/api/reports"),
           fetch("https://evoc-backends.onrender.com/api/announcement"),
-          fetch("https://evoc-backends.onrender.com/api/collection"),
+          fetch("https://evoc-backends.onrender.com/api/fixedschedule"),
           fetch("https://evoc-backends.onrender.com/api/mobileuser"),
         ]);
 
