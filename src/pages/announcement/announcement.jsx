@@ -18,7 +18,7 @@ function Announcement() {
     // Fetch all announcements on component mount
     const fetchAnnouncements = async () => {
       try {
-        const response = await fetch("https://evoc-backends.onrender.com/api/announcement");
+        const response = await fetch("https://evoc-backend.onrender.com/api/announcement");
         if (!response.ok) throw new Error("Failed to fetch announcements");
         const data = await response.json();
         setAnnouncements(data);
@@ -46,7 +46,7 @@ function Announcement() {
     const newAnnouncement = { title, description, time_stamp };
 
     try {
-      const response = await fetch("https://evoc-backends.onrender.com/api/announcement", {
+      const response = await fetch("https://evoc-backend.onrender.com/api/announcement", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newAnnouncement),

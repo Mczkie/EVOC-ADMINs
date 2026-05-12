@@ -20,11 +20,11 @@ function DashboardContent() {
     const fetchData = async () => {
       try {
         const [userResponse, reportsResponse, announcementResponse, collectionResponse, mobileUserResponse] = await Promise.all([
-          fetch("https://evoc-backends.onrender.com/api/users"),
-          fetch("https://evoc-backends.onrender.com/api/reports"),
-          fetch("https://evoc-backends.onrender.com/api/announcement"),
-          fetch("https://evoc-backends.onrender.com/api/fixedschedule"),
-          fetch("https://evoc-backends.onrender.com/api/mobileuser"),
+          fetch("https://evoc-backend.onrender.com/api/users"),
+          fetch("https://evoc-backend.onrender.com/api/reports"),
+          fetch("https://evoc-backend.onrender.com/api/announcement"),
+          fetch("https://evoc-backend.onrender.com/api/fixedschedule"),
+          fetch("https://evoc-backend.onrender.com/api/mobileuser"),
         ]);
 
         if (!userResponse.ok) throw new Error("Failed to fetch users");

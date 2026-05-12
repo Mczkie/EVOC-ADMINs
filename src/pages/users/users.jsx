@@ -17,7 +17,7 @@ function Users() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://evoc-backends.onrender.com/api/users",
+        "https://evoc-backend.onrender.com/api/users",
       );
       const contentType = response.headers.get("content-type");
 

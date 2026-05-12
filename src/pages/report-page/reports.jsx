@@ -16,7 +16,7 @@ function Reports() {
 
   const fetchReports = async () => {
     try {
-      const response = await fetch("https://evoc-backends.onrender.com/api/reports");
+      const response = await fetch("https://evoc-backend.onrender.com/api/reports");
       if (!response.ok) throw new Error("Failed to fetch reports");
       const data = await response.json();
       setReports(data);
@@ -41,7 +41,7 @@ function Reports() {
     }
 
     try {
-      const response = await fetch("https://evoc-backends.onrender.com/api/reports", {
+      const response = await fetch("https://evoc-backend.onrender.com/api/reports", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description }),
