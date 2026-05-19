@@ -1,4 +1,6 @@
 import React from "react";
+import { FaTrash } from "react-icons/fa";
+import "./table-action.css";
 
 function TableAction({ id, email, password, setUsers }) {
   const handleDelete = async () => {
@@ -24,12 +26,13 @@ function TableAction({ id, email, password, setUsers }) {
   };
 
   return (
-    <div id="action-container">
-      <button id="delete-btn" onClick={handleDelete}>
-        Delete
+    <div className="action-container">
+      <button className="delete-btn" onClick={handleDelete}>
+        <FaTrash/>
       </button>
     </div>
   );
 }
+
 
 export default TableAction;

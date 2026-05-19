@@ -9,6 +9,7 @@ import Announcement from './pages/announcement/announcement';
 import Reports from './pages/report-page/reports';
 import Dashboardcontent from './pages/dashboard/dashboard-content';
 import MobileUsers from './pages/mobileUser/mobileuser';
+import Barangay from './pages/barangay/barangay';
 import Users from './pages/users/users';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='announcement' element={<Announcement />} />
           <Route path='reports' element={<Reports />} />
           <Route path='mobile-users' element={<MobileUsers />} />
+          <Route path='barangay' element={<Barangay />} />
         </Route>
       </Routes>
     </Router>

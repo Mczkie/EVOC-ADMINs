@@ -27,6 +27,9 @@
 
 }
 
+
+
+
 ul li span {
     padding: 5px;
 }
@@ -52,14 +55,17 @@ li:hover {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #FF0000;
     color: white;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    width: 13vw;
 }
 
-button:hover {
-    background-color: #0056b3;
+.buttonLogout:hover {
+    background-color: #dc2626;
 }
+
+
 
 

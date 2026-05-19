@@ -1,19 +1,24 @@
 .Dashboard {
     display: flex;
+    flex-direction: row;
     min-height: 100vh;
     max-height: auto;
+  
+    margin: 0;
 }
 
+
 .Sidebar {
-    padding: 10px 0px;
+    padding: 10px ;
     background-color: aliceblue;
     height: auto;
-    width: 10vw;
+    width: 200px;
 }
 
 .main-content {
-    width: 100%;
-    background-color: #d3d3d3;
+    margin: 0;
+    width: 90vw;
+    background-color: #eeebee;
     color: white;
     height: auto;
 }

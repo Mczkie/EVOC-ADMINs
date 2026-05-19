@@ -5,8 +5,8 @@ export default function update() {
   return;
   {
     showModal && (
-      <div className="modalOverlay">
-        <div className="modalContent">
+      <div className="update-modalOverlay">
+        <div className="update-modalContent">
           <h2>Add New Collection Schedule</h2>
           {error && <p className="errorMessage">{error}</p>}
           {successMessage && <p className="successMessage">{successMessage}</p>}

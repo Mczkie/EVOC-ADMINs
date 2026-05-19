@@ -1,0 +1,488 @@
+.barangay-body {
+    padding: 30px;
+}
+
+.barangay-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.barangay-hero-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.barangay-title {
+    margin-bottom: -5px;
+}
+
+.barangay-edit-container {
+    display: flex;
+    gap: 10px;
+}
+
+.barangay-edit-button {
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.barangay-add-button {
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.barangay-edit-button.active {
+    background-color: #00a63e;
+}
+
+/* #00a63e; */
+
+.nav-container {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+}
+
+
+.barangay-nav-route {
+   background-color: #fff;
+   width: 15vw;
+   padding: 20px 15px;
+   border-radius: 10px;
+   border: 1px solid #ccc;
+   height: auto;
+}
+
+.barangay-list-title {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.barangay-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.barangay-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.barangay-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.barangay-card:hover {
+  transform: scale(1.02);
+  border-color: #cbd5e1;
+}
+
+.barangay-card.active {
+  border-color: #00a63e;
+  background: #f0fff5;
+}
+
+.icon-box {
+  width: 45px;
+  height: 45px;
+  background: #dcfce7;
+  color: #00a63e;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.barangay-text h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.barangay-text p {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+
+.barangay-info-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.info-cards {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 13vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info-cards h2 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.info-cards p {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 10px;
+}
+
+.details-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    height: auto;
+}
+
+.details-collection-contacts-container {
+    padding: 5px;
+    background-color: #d2d4d6;
+    width: 330px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.details-collection-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+}
+
+.details-button {
+    border: none;
+    padding: 5px;
+    width: 150px;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.details-button.active {
+    background-color: #fff;
+    color: #000;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.details-titles {
+    font-size: 16px;
+}
+
+/* contact page */
+
+.contact-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-container label {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+
+
+.telephone{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.telephone input {
+    border: 1px solid #d2d4d6;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.telephone input:focus {
+    border: 2px solid #00a63e;
+}
+
+#email {
+    border: 1px solid #d2d4d6;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+/* emegency section */
+.emergency-header {
+    padding: 10px;
+}
+
+.emergency-header h1 {
+    font-size: 14px;
+}
+
+.emergency-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f7;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.emegency-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.emergency-title {
+    height: auto;
+}
+
+.emergency-title h2 {
+    font-size: 18px;
+    margin-bottom: -5px;
+
+}
+
+.emergency-title  p {
+    font-size: 14px;
+}
+
+.emergency-hotline h2{
+    font-size: 14px;
+}
+
+/* Collection Section */
+.collection-days {
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-days-title {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.Days-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.Days-card {
+    background-color: #67f29a;
+    padding: 4px 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.Days-card .Monday {
+    font-size: 12px;
+    color: #00a63e;
+}
+
+.collection-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.collcetion-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.collcetion-form-container label {
+    font-size: 14px;
+    font-weight: 600;
+    
+}
+
+.collcetion-form-container input {
+    border: 1px solid #d2d4d6;
+    outline: none;
+    width: 90%;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.collcetion-form-container input:focus {
+    border: 2px solid #00a63e;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* details section */
+
+.details-form-cards {
+    display: grid;
+    grid-template-columns: 1f;
+    gap: 5px;
+    width: 100%;
+}
+
+.details-card {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 20px;
+    
+}
+
+.details-card label {
+    font-size: 14px;
+    font-weight: 600;
+    
+}
+
+.details-card input {
+    border: 1px solid #d2d4d6;
+    outline: none;
+    width: 90%;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.details-card input:focus {
+    border: 2px solid #00a63e;
+}
+
+/* modal overlay for adding new barangay */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  width: 500px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.modal-grid input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.modal-grid input:focus {
+  border-color: #00a63e;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.cancel-btn {
+  background: #ccc;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #00a63e;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.barangay-delete-button {
+    background-color: #FF0000;
+    color: #fff;
+    font-weight: 600;
+    width: 127px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.barangay-delete-button:hover {
+    background-color: #dc2626;
+}

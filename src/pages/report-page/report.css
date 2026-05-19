@@ -50,3 +50,8 @@
   padding: 10px;
   overflow-x: auto;
 }
+
+.report-table {
+  width: 100%;
+  margin-bottom: 10px;
+}

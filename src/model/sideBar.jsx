@@ -1,12 +1,14 @@
 import React from "react";
 import "../model/sideBar.css";
 import "../pages/dashboard/dashboard.css";
+import logo from "../assets/EcoVistaLogo.png";
 import { useNavigate, Link } from "react-router-dom";
 import {
   FaHome,
   FaUserCircle,
   FaCalendarAlt,
   FaBullhorn,
+  FaBuilding,
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -33,8 +35,8 @@ function Sidebar() {
     <div className="Sidebar">
       <div className="title">
         <div className="title-hero">
-          <img src="evoclogo.png" alt="evoc-logo" width={100} height={100} />
-          <h1 className="title-name">EVOC ADMIN</h1>
+          <img src={logo} alt="evoc-logo" width={100} height={100} />
+          <h1 className="title-name">Admin Dashboard</h1>
         </div>
 
        
@@ -49,7 +51,7 @@ function Sidebar() {
             Dashboard
           </Link>
         </li>
-        <li>
+        <li className={({ isActive }) => (isActive ? "active-link" : "")}>
           <Link to="/dashboard/user">
             <span>
               <FaUserCircle />
@@ -74,11 +76,11 @@ function Sidebar() {
           </Link>
         </li>
          <li>
-          <Link to="/dashboard/mobile-users">
+          <Link to="/dashboard/barangay">
             <span>
-              <FaUserCircle />
+              <FaBuilding />
             </span>
-            Mobile Users
+            Barangay Profile
           </Link>
         </li>
       </ul>

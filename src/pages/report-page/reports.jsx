@@ -82,8 +82,8 @@ function Reports() {
       </div>
 
       {showModal && (
-        <div className="modalOverlay">
-          <div className="modalContent">
+        <div className="reports-modalOverlay">
+          <div className="reports-modalContent">
             <h2>Add New Report</h2>
             {error && <p className="errorMessage">{error}</p>}
             {successMessage && (
@@ -114,7 +114,7 @@ function Reports() {
 
       <div className="table-container">
         <div className="reportBody">
-          <table>
+          <table className="report-table">
             <thead>
               <tr>
                 <th>Title</th>

@@ -1,0 +1,13 @@
+ <button
+                      onClick={() => {
+                        setBarangay(sched.barangay);
+                        setScheduleText(sched.schedule);
+                        fixedUpdateRef.current = sched.id;
+                        setShowFixedUpdateModal(true);
+                      }}
+                    >
+                      Update
+                    </button>
+                    <button onClick={() => handleDeleteFixed(sched.id)}>
+                      Delete
+                    </button>

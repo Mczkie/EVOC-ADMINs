@@ -1,101 +1,141 @@
 /* Apply a background image to the container */
 body {
-    /* background-image: url('../images/background.jpg'); */
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    padding: 10px;
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap; /* Make it responsive */
-  }
+  /* background-image: url('../images/background.jpg'); */
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
-  .widgetContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
+.container {
+  padding: 10px 10px;
+}
 
-  .chartSection {
-    background-color: rgba(248, 249, 250, 0.9); /* Slight transparency for background */
-    width: 85%;
-    height: auto;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    border-radius: 5px;
-  }
+.nav-bar {
+  display: flex;
+  align-items: center;
+  top: -18px;
+  padding: 10px 10px;
+  height: 5vh;
+  background-color: #ffffff;
+  z-index: 1000;
+}
 
-  .chartContainer {
-  width: 90%;      /* or fixed width like 800px */
-  max-width: 1000px;
-  height: 500px;   /* desired height */
-  margin: 0 auto;
+.nav-bar .nav-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 
+.nav-bar .nav-title {
+  text-align: center;
+  font-size: 20px;
+}
+.nav-bar .nav-hero {
+  display: flex;
+  flex-direction: row;
+  width: 10vw;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.nav-hero:hover {
+  background-color: #a3a5a5;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.nav-bar .nav-user {
+  margin: 1px;
+  text-align: start;
+  font-size: 14px;
+}
+
+.widgetContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.chartSection {
+  background-color: rgba(
+    248,
+    249,
+    250,
+    0.9
+  ); /* Slight transparency for background */
+  width: 47%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 20px;
+}
+
+.chartContainer {
+  border-radius: 20px;
+  background-color: #ffffff;
+  width: 100%; 
+  height: 100%; 
+}
   
-  .contentContainer {
-    border-radius: 5px;
-    background-color: rgba(248, 249, 250, 0.9); /* Slight transparency for background */
-    color: black;
-    width: 220px;
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 20px; /* Add space between widgets */
-  }
-  
-  .contentContainer h1 {
-    font-size: 24px;
-    margin: 10px 0;
-  }
-  
-  .contentContainer h2 {
-    font-size: 30px;
-    font-weight: bold;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  /* Responsive styling */
-  @media (max-width: 768px) {
-    .container {
-      padding: 10px;
-      flex-direction: column;
-    }
-  
-    .contentContainer {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .contentContainer {
-      width: 100%;
-      padding: 10px;
-    }
-  
-    .contentContainer h1 {
-      font-size: 18px;
-    }
-  
-    .contentContainer h2 {
-      font-size: 24px;
-    }
-  }
-  
+
+ .header-title {
+  font-size: 24px;
+}
+
+.contentContainer {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: black;
+  width: 200px;
+  padding: 10px;
+}
+
+.contentContainer .hero-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contentContainer .hero-title .titles {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+.hero-charts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.chart-container {
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  width: 50%;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  color: red;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+.hero-icons {
+  color: inherit;
+}
