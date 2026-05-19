@@ -33,7 +33,6 @@ function LoginPage() {
       if (response.ok) {
         localStorage.setItem("user", JSON.stringify(data.user));
 
-        alert("Login Successful");
 
         setMessage(data.message);
         setTimeout(() => {
