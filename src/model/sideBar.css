@@ -66,6 +66,9 @@ li:hover {
     background-color: #dc2626;
 }
 
+.active-link {
+    background-color: #000;
+}
 
 
 

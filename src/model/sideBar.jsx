@@ -56,7 +56,7 @@ function Sidebar() {
             <span>
               <FaUserCircle />
             </span>
-            Users
+            Admin
           </Link>
         </li>
         <li>
@@ -73,6 +73,14 @@ function Sidebar() {
               <FaBullhorn />
             </span>
             Announcement
+          </Link>
+        </li>
+        <li>
+          <Link to="/dashboard/mobile-users">
+            <span>
+              <FaBullhorn />
+            </span>
+            Mobile User Count
           </Link>
         </li>
          <li>

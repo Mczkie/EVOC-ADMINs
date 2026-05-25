@@ -27,6 +27,7 @@ function App() {
           <Route path='reports' element={<Reports />} />
           <Route path='mobile-users' element={<MobileUsers />} />
           <Route path='barangay' element={<Barangay />} />
+          
         </Route>
       </Routes>
     </Router>
