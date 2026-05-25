@@ -13,6 +13,7 @@ function Announcement() {
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -40,44 +41,22 @@ function Announcement() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccessMessage("");
 
-    if (!title || !description) {
-      setError("Title and Description are required!");
-      return;
-    }
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", imageFile); // NEW
 
-    // Format timestamp for MySQL DATETIME
-    const now = new Date();
+    const response = await fetch(
+      "https://evoc-backend.onrender.com/api/announcement",
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
 
-    const newAnnouncement = { title, description };
-
-    try {
-      const response = await fetch(
-        "https://evoc-backend.onrender.com/api/announcement",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newAnnouncement),
-        },
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Failed to create announcement");
-      }
-
-      const data = await response.json();
-      setAnnouncements((prev) => [...prev, data]);
-      setTitle("");
-      setDescription("");
-      setSuccessMessage("Announcement added successfully!");
-      setCurrentPage(1);
-    } catch (err) {
-      console.error("Error submitting announcement:", err);
-      setError("Error adding announcement");
-    }
+    const data = await response.json();
+    setAnnouncements((prev) => [...prev, data]);
   };
 
   // Calculate total number of pages
@@ -202,7 +181,11 @@ function Announcement() {
           <div className="hero-box">
             <div className="total-container">
               <h3 className="total-title">Total Announcements</h3>
-              <FaBullhorn className="hero-icon" color="#16a34a" fill="#16a34a"/>
+              <FaBullhorn
+                className="hero-icon"
+                color="#16a34a"
+                fill="#16a34a"
+              />
             </div>
             <p className="hero-number">{totalAnnouncements}</p>
           </div>
@@ -210,10 +193,11 @@ function Announcement() {
           <div className="hero-box">
             <div className="showing-container">
               <h3 className="showing-title">Showing</h3>
-              <FaEye className="hero-icon" color="#3656e3" fill="#3656e3"/>
+              <FaEye className="hero-icon" color="#3656e3" fill="#3656e3" />
             </div>
             <p className="hero-number">
-              {currentShowingStart} <span className="outof">out of</span> {currentShowingEnd}
+              {currentShowingStart} <span className="outof">out of</span>{" "}
+              {currentShowingEnd}
             </p>
           </div>
         </div>
@@ -237,9 +221,23 @@ function Announcement() {
                       .slice(0, 8),
                   )}
                 </small>
+                <div>
+                  {announcement.image && (
+                    <img
+                      src={`https://evoc-backend.onrender.com${announcement.image}`}
+                      alt="announcement"
+                      style={{
+                        width: "100%",
+                        height: "400px",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                        marginTop: "10px",
+                      }}
+                    />
+                  )}
+                </div>
               </div>
-
-              {/* Right: optional status or actions */}
+               {/* Right: optional status or actions */}
               <div className="status announcement">published</div>
 
               <div className="action-buttons">
@@ -291,6 +289,13 @@ function Announcement() {
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Enter description..."
                   required
+                />
+
+                <label>Image</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setImageFile(e.target.files[0])}
                 />
 
                 {error && <p className="error">{error}</p>}

@@ -16,13 +16,15 @@ import {
   FaChartBar,
   FaCalendarAlt,
   FaMobileAlt,
-  FaBuilding
+  FaBuilding,
 } from "react-icons/fa";
 
 function DashboardContent() {
   const [currentUser, setCurrentUser] = useState(null);
   const [widgets, setWidgets] = useState([]);
   const [error, setError] = useState(null);
+  const [recentAnnouncements, setRecentAnnouncements] = useState([]);
+  const [recentCollections, setRecentCollections] = useState([]);
 
   useEffect(() => {
     // ✅ Load logged-in user from localStorage
@@ -61,14 +63,25 @@ function DashboardContent() {
           throw new Error("Failed to fetch announcements");
         if (!collectionResponse.ok)
           throw new Error("Failed to fetch collections");
-        if (!barangayResponse.ok)
-          throw new Error("Failed to fetch barangay");
+        if (!barangayResponse.ok) throw new Error("Failed to fetch barangay");
 
         const userData = await userResponse.json();
         const reportsData = await reportsResponse.json();
         const announcementData = await announcementResponse.json();
         const collectionData = await collectionResponse.json();
         const barangayData = await barangayResponse.json();
+
+        // Get latest 5 announcements
+        const latestAnnouncements = [...announcementData].slice(-5).reverse();
+
+        // Get latest 5 collections
+        const latestCollections = [...collectionData].slice(-5).reverse();
+
+        setRecentAnnouncements(latestAnnouncements);
+        setRecentCollections(latestCollections);
+
+        console.log("Recent Announcements:", latestAnnouncements);
+        console.log("Recent Collections:", latestCollections);
 
         setWidgets([
           {
@@ -89,7 +102,7 @@ function DashboardContent() {
           {
             title: "Barangays",
             count: barangayData.length,
-            icons: <FaBuilding size={20} color="#00a63e" fill="#00a63e"/>,
+            icons: <FaBuilding size={20} color="#00a63e" fill="#00a63e" />,
           },
         ]);
       } catch (error) {
@@ -176,6 +189,38 @@ function DashboardContent() {
             </PieChart>
           </ResponsiveContainer>
         </section>
+      </div>
+
+      <div className="recent-section">
+        <div className="recent-card">
+          <h2>New Announcements</h2>
+
+          {recentAnnouncements.length > 0 ? (
+            recentAnnouncements.map((item) => (
+              <div key={item.id} className="recent-item">
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+              </div>
+            ))
+          ) : (
+            <p>No announcements</p>
+          )}
+        </div>
+
+        <div className="recent-card">
+          <h2>New Collections</h2>
+
+          {recentCollections.length > 0 ? (
+            recentCollections.map((item) => (
+              <div key={item.id} className="recent-item">
+                <h4>{item.barangay}</h4>
+                <p>{item.schedule}</p>
+              </div>
+            ))
+          ) : (
+            <p>No collections</p>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -285,6 +285,8 @@ function Collection() {
                     <option value="Residential">Residential</option>
                     <option value="Commercial">Commercial</option>
                     <option value="Special Waste">Special Waste</option>
+                    <option value="Special Waste">Biodegradable</option>
+                    <option value="Special Waste">Non-Biodegradable</option>
                   </select>
                 </div>
               </div>
