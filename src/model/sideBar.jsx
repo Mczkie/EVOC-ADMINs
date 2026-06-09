@@ -9,6 +9,7 @@ import {
   FaCalendarAlt,
   FaBullhorn,
   FaBuilding,
+  FaUsers
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -78,7 +79,7 @@ function Sidebar() {
         <li>
           <Link to="/dashboard/mobile-users">
             <span>
-              <FaBullhorn />
+              <FaUsers />
             </span>
             Mobile User Count
           </Link>

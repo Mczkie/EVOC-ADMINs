@@ -17,6 +17,7 @@ import {
   FaCalendarAlt,
   FaMobileAlt,
   FaBuilding,
+  FaMobile,
 } from "react-icons/fa";
 
 function DashboardContent() {
@@ -49,12 +50,14 @@ function DashboardContent() {
           announcementResponse,
           collectionResponse,
           barangayResponse,
+          mobileUsersResponse,
         ] = await Promise.all([
           fetch("https://evoc-backend.onrender.com/api/users"),
           fetch("https://evoc-backend.onrender.com/api/reports"),
           fetch("https://evoc-backend.onrender.com/api/announcement"),
           fetch("https://evoc-backend.onrender.com/api/fixedschedule"),
           fetch("https://evoc-backend.onrender.com/api/barangay"),
+          fetch("https://evoc-backend.onrender.com/api/mobile-users"),
         ]);
 
         if (!userResponse.ok) throw new Error("Failed to fetch users");
@@ -64,12 +67,14 @@ function DashboardContent() {
         if (!collectionResponse.ok)
           throw new Error("Failed to fetch collections");
         if (!barangayResponse.ok) throw new Error("Failed to fetch barangay");
+        if(!mobileUsersResponse.ok) throw new Error("Failed to fetch mobile users");
 
         const userData = await userResponse.json();
         const reportsData = await reportsResponse.json();
         const announcementData = await announcementResponse.json();
         const collectionData = await collectionResponse.json();
         const barangayData = await barangayResponse.json();
+        const mobileUsersData = await mobileUsersResponse.json();
 
         // Get latest 5 announcements
         const latestAnnouncements = [...announcementData].slice(-5).reverse();
@@ -103,6 +108,11 @@ function DashboardContent() {
             title: "Barangays",
             count: barangayData.length,
             icons: <FaBuilding size={20} color="#00a63e" fill="#00a63e" />,
+          },
+          {
+            title: "Mobile Users",
+            count: mobileUsersData.length,
+            icons: <FaMobile size={20} color="#8B5CF6" fill="#8B5CF6" />,
           },
         ]);
       } catch (error) {
