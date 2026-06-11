@@ -236,14 +236,12 @@ function Announcement() {
                       }}
                     >
                       <source
-                        src={`https://evoc-backends-production.up.railway.app${announcement.image}`}
-                        type="video/mp4"
+                        src={`evoc-backends-production.up.railway.app${announcement.image}`}
                       />
-                      Your browser does not support the video tag.
                     </video>
                   ) : (
                     <img
-                      src={`https://evoc-backends-production.up.railway.app${announcement.image}`}
+                      src={`evoc-backends-production.up.railway.app${announcement.image}`}
                       alt="announcement"
                       style={{
                         width: "100%",
@@ -255,6 +253,7 @@ function Announcement() {
                     />
                   )}
                 </div>
+                <progress value={imageFile ? imageFile.size : 0} max="100" color="green" style={{ width: "100%", marginTop: "10px" }} />
               </div>
               {/* Right: optional status or actions */}
               <div className="status announcement">published</div>
@@ -310,7 +309,7 @@ function Announcement() {
                   required
                 />
 
-                <label>Image</label>
+                <label>Image/Video</label>
                 <input
                   type="file"
                   accept="image/*, video/*"
