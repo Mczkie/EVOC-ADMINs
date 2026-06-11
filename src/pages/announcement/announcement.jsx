@@ -291,16 +291,6 @@ function Announcement() {
                     )
                   ) : null}
                 </div>
-                {uploading && (
-                  <div style={{ marginTop: "10px" }}>
-                    <progress
-                      value={progress}
-                      max="100"
-                      style={{ width: "100%" }}
-                    />
-                    <p>{progress}% uploading...</p>
-                  </div>
-                )}
               </div>
               {/* Right: optional status or actions */}
               <div className="status announcement">published</div>
@@ -362,6 +352,17 @@ function Announcement() {
                   accept="image/*, video/*"
                   onChange={(e) => setImageFile(e.target.files[0])}
                 />
+
+                {uploading && (
+                  <div style={{ marginTop: "10px" }}>
+                    <progress
+                      value={progress}
+                      max="100"
+                      style={{ width: "100%" }}
+                    />
+                    <p className="upload-progress">{progress}% uploading...</p>
+                  </div>
+                )}
 
                 {error && <p className="error">{error}</p>}
                 {successMessage && <p className="success">{successMessage}</p>}

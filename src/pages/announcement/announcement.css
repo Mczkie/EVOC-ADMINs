@@ -460,3 +460,7 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
+.upload-progress {
+  font-size: 14px;
+}
