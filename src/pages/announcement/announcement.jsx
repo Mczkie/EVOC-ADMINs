@@ -14,6 +14,8 @@ function Announcement() {
   const [editModal, setEditModal] = useState(false);
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [uploading, setUploading] = useState(false);
 
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -39,24 +41,56 @@ function Announcement() {
     fetchAnnouncements();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("image", imageFile); // NEW
+    formData.append("image", imageFile);
 
-    const response = await fetch(
+    const xhr = new XMLHttpRequest();
+
+    xhr.open(
+      "POST",
       "https://evoc-backends-production.up.railway.app/api/announcement",
-      {
-        method: "POST",
-        body: formData,
-      },
     );
 
-    const data = await response.json();
-    setAnnouncements((prev) => [...prev, data]);
+    // 👇 THIS is the upload progress listener
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        setProgress(percent);
+      }
+    };
+
+    xhr.onloadstart = () => {
+      setUploading(true);
+      setProgress(0);
+    };
+
+    xhr.onload = () => {
+      setUploading(false);
+
+      if (xhr.status === 200 || xhr.status === 201) {
+        const data = JSON.parse(xhr.responseText);
+
+        setAnnouncements((prev) => [...prev, data]);
+        setProgress(0); // reset after success
+        setShowModal(false);
+        setTitle("");
+        setDescription("");
+        setImageFile(null);
+      } else {
+        console.error("Upload failed:", xhr.responseText);
+      }
+    };
+
+    xhr.onerror = () => {
+      console.error("Upload error");
+    };
+
+    xhr.send(formData);
   };
 
   // Calculate total number of pages
@@ -222,38 +256,51 @@ function Announcement() {
                   )}
                 </small>
                 <div>
-                  {announcement.image &&
-                  (announcement.image.endsWith(".mp4") ||
+                  {announcement.image ? (
+                    announcement.image.endsWith(".mp4") ||
                     announcement.image.endsWith(".mov") ||
-                    announcement.image.endsWith(".webm")) ? (
-                    <video
-                      controls
-                      style={{
-                        width: "100%",
-                        height: "400px",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                      }}
-                    >
-                      <source
-                        src={`evoc-backends-production.up.railway.app${announcement.image}`}
+                    announcement.image.endsWith(".webm") ? (
+                      <video
+                        controls
+                        style={{
+                          width: "100%",
+                          height: "400px",
+                          borderRadius: "10px",
+                          marginTop: "10px",
+                        }}
+                      >
+                        <source
+                          src={`https://evoc-backends-production.up.railway.app${announcement.image}`}
+                        />
+                      </video>
+                    ) : (
+                      <img
+                        src={`https://evoc-backends-production.up.railway.app${announcement.image}`}
+                        alt="announcement"
+                        style={{
+                          width: "100%",
+                          height: "400px",
+                          objectFit: "cover",
+                          borderRadius: "10px",
+                          marginTop: "10px",
+                        }}
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
                       />
-                    </video>
-                  ) : (
-                    <img
-                      src={`evoc-backends-production.up.railway.app${announcement.image}`}
-                      alt="announcement"
-                      style={{
-                        width: "100%",
-                        height: "400px",
-                        objectFit: "cover",
-                        borderRadius: "10px",
-                        marginTop: "10px",
-                      }}
-                    />
-                  )}
+                    )
+                  ) : null}
                 </div>
-                <progress value={imageFile ? imageFile.size : 0} max="100" color="green" style={{ width: "100%", marginTop: "10px" }} />
+                {uploading && (
+                  <div style={{ marginTop: "10px" }}>
+                    <progress
+                      value={progress}
+                      max="100"
+                      style={{ width: "100%" }}
+                    />
+                    <p>{progress}% uploading...</p>
+                  </div>
+                )}
               </div>
               {/* Right: optional status or actions */}
               <div className="status announcement">published</div>
