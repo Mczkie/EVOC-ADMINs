@@ -14,7 +14,7 @@ function MobileUsers() {
       setLoading(true);
 
       const res = await fetch(
-        "https://evoc-backend.onrender.com/api/mobile-users"
+        "https://evoc-backends-production.up.railway.app/api/mobile-users"
       );
 
       if (!res.ok) {

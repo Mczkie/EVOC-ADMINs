@@ -26,7 +26,7 @@ function Announcement() {
     const fetchAnnouncements = async () => {
       try {
         const response = await fetch(
-          "https://evoc-backend.onrender.com/api/announcement",
+          "https://evoc-backends-production.up.railway.app/api/announcement",
         );
         if (!response.ok) throw new Error("Failed to fetch announcements");
         const data = await response.json();
@@ -48,7 +48,7 @@ function Announcement() {
     formData.append("image", imageFile); // NEW
 
     const response = await fetch(
-      "https://evoc-backend.onrender.com/api/announcement",
+      "https://evoc-backends-production.up.railway.app/api/announcement",
       {
         method: "POST",
         body: formData,
@@ -103,7 +103,7 @@ function Announcement() {
 
     try {
       const response = await fetch(
-        `https://evoc-backend.onrender.com/api/announcement/${selectedAnnouncement.id}`,
+        `https://evoc-backends-production.up.railway.app/api/announcement/${selectedAnnouncement.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -137,7 +137,7 @@ function Announcement() {
 
     try {
       const response = await fetch(
-        "https://evoc-backend.onrender.com/api/announcement",
+        "https://evoc-backends-production.up.railway.app/api/announcement",
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -222,9 +222,28 @@ function Announcement() {
                   )}
                 </small>
                 <div>
-                  {announcement.image && (
+                  {announcement.image &&
+                  (announcement.image.endsWith(".mp4") ||
+                    announcement.image.endsWith(".mov") ||
+                    announcement.image.endsWith(".webm")) ? (
+                    <video
+                      controls
+                      style={{
+                        width: "100%",
+                        height: "400px",
+                        borderRadius: "10px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <source
+                        src={`https://evoc-backends-production.up.railway.app${announcement.image}`}
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
                     <img
-                      src={`https://evoc-backend.onrender.com${announcement.image}`}
+                      src={`https://evoc-backends-production.up.railway.app${announcement.image}`}
                       alt="announcement"
                       style={{
                         width: "100%",
@@ -237,7 +256,7 @@ function Announcement() {
                   )}
                 </div>
               </div>
-               {/* Right: optional status or actions */}
+              {/* Right: optional status or actions */}
               <div className="status announcement">published</div>
 
               <div className="action-buttons">
@@ -294,7 +313,7 @@ function Announcement() {
                 <label>Image</label>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/*, video/*"
                   onChange={(e) => setImageFile(e.target.files[0])}
                 />
 

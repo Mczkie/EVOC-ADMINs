@@ -19,7 +19,7 @@ function Collection() {
 
   const fixedUpdateRef = useRef(null);
 
-  const FIXED_API = "https://evoc-backend.onrender.com/api/fixedschedule";
+  const FIXED_API = "https://evoc-backends-production.up.railway.app/api/fixedschedule";
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);

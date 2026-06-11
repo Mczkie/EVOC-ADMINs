@@ -52,12 +52,12 @@ function DashboardContent() {
           barangayResponse,
           mobileUsersResponse,
         ] = await Promise.all([
-          fetch("https://evoc-backend.onrender.com/api/users"),
-          fetch("https://evoc-backend.onrender.com/api/reports"),
-          fetch("https://evoc-backend.onrender.com/api/announcement"),
-          fetch("https://evoc-backend.onrender.com/api/fixedschedule"),
-          fetch("https://evoc-backend.onrender.com/api/barangay"),
-          fetch("https://evoc-backend.onrender.com/api/mobile-users"),
+          fetch("https://evoc-backends-production.up.railway.app/api/users"),
+          fetch("https://evoc-backends-production.up.railway.app/api/reports"),
+          fetch("https://evoc-backends-production.up.railway.app/api/announcement"),
+          fetch("https://evoc-backends-production.up.railway.app/api/fixedschedule"),
+          fetch("https://evoc-backends-production.up.railway.app/api/barangay"),
+          fetch("https://evoc-backends-production.up.railway.app/api/mobile-users"),
         ]);
 
         if (!userResponse.ok) throw new Error("Failed to fetch users");

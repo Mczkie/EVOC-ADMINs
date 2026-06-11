@@ -38,7 +38,7 @@ function Barangay() {
   const handleAddBarangay = async () => {
     try {
       const res = await fetch(
-        "https://evoc-backend.onrender.com/api/barangay",
+        "https://evoc-backends-production.up.railway.app/api/barangay",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -91,7 +91,7 @@ function Barangay() {
 
     try {
       const res = await fetch(
-        `https://evoc-backend.onrender.com/api/barangay/${selectedBarangay.id}`,
+        `https://evoc-backends-production.up.railway.app/api/barangay/${selectedBarangay.id}`,
         {
           method: "DELETE",
         },
@@ -133,7 +133,7 @@ function Barangay() {
   const handleCreate = async () => {
     try {
       const res = await fetch(
-        "https://evoc-backend.onrender.com/api/barangay",
+        "https://evoc-backends-production.up.railway.app/api/barangay",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -162,7 +162,7 @@ function Barangay() {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          "https://evoc-backend.onrender.com/api/barangay",
+          "https://evoc-backends-production.up.railway.app/api/barangay",
         );
         const data = await res.json();
         console.log("BARANGAYS FROM API:", data);
@@ -189,7 +189,7 @@ function Barangay() {
     }
 
     const res = await fetch(
-      `https://evoc-backend.onrender.com/api/barangay/${selectedBarangay.id}`,
+      `https://evoc-backends-production.up.railway.app/api/barangay/${selectedBarangay.id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

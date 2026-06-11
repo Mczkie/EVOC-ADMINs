@@ -18,7 +18,7 @@ function Users() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://evoc-backend.onrender.com/api/users",
+        "https://evoc-backends-production.up.railway.app/api/users",
       );
       const contentType = response.headers.get("content-type");
 
@@ -149,7 +149,7 @@ function Users() {
 
                   try {
                     const response = await fetch(
-                      "https://evoc-backend.onrender.com/api/admin",
+                      "https://evoc-backends-production.up.railway.app/api/admin",
                       {
                         method: "POST",
                         headers: {
